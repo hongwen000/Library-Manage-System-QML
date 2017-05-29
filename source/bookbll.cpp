@@ -1,23 +1,20 @@
-#include "header/bookbll.h"
-QString Record::bookId() const
+﻿#include "header/bookbll.h"
+
+
+void Book::bookOutTo(User *_borrower)
 {
-    return bookId_;
+    //Todo : limit it that only borrow one book
+    m_borrower << QVariant::fromValue(_borrower);
+    //m_borrower.append(_borrower);
+    _borrower->borrowBook(this);
+
 }
-int Record::state() const
+
+void Book::bookReturnIn(User *_borrower)
 {
-    return state_;
-}
-void Record::setBookId(const QString &value)
-{
-    if(bookId_ == value)
-        return;
-    bookId_ = value;
-    emit bookIdChanged();
-}
-void Record::setState(int value)
-{
-    if(state_ == value)
-        return;
-    state_ = value;
-    emit stateChanged();
+    if(m_borrower.contains(QVariant::fromValue(_borrower)))
+    {
+        m_borrower.erase(m_borrower.begin() + m_borrower.indexOf(QVariant::fromValue(_borrower)));
+        _borrower->returnBook(this);
+    }
 }

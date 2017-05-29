@@ -1,0 +1,83 @@
+﻿#include "header/loginbll.h"
+void Login::setUsrname(const QString &usrname) {
+    m_usrname = usrname;
+    emit usrnameChanged();
+}
+
+QString Login::password() const
+{
+    return m_password;
+}
+
+void Login::setPassword(const QString &password)
+{
+    m_password = password;
+    emit passwordChanged();
+}
+
+bool Login::adminLogined() const
+{
+    return m_adminLogined;
+}
+
+bool Login::usrLogined() const
+{
+    return m_usrLogined;
+}
+
+void Login::setAdminLogined(bool deter)
+{
+    m_adminLogined = deter;
+    emit adminLoginedChanged();
+}
+
+void Login::setUsrLogined(bool deter)
+{
+    m_usrLogined = deter;
+    emit usrLoginedChanged();
+}
+
+void Login::auth()
+{
+    for(auto i : m_securityDB) {
+        QString rightUsername = (i.toHash()).value("useranme").toString();
+        QString rightPassword = (i.toHash()).value("password").toString();
+        QString rightType     = (i.toHash()).value("type").toString();
+        if(rightUsername == m_usrname)
+        {
+            if(rightPassword == m_password)
+            {
+                if(rightType == "user") {
+                    emit usrAuthSucc();
+                    return;
+                }
+                else {
+                    emit adminAuthSucc();
+                    return;
+                }
+            }
+        }
+    }
+    emit authFail();
+}
+
+void Login::setSecurityDB(const QVariantList &rhs)
+{
+    m_securityDB = rhs;
+}
+
+QVariantList Login::securityDB() const
+{
+    return m_securityDB;
+}
+
+
+Login::Login(QQuickItem *parent)
+{
+
+}
+
+QString Login::usrname() const
+{
+    return m_usrname;
+}

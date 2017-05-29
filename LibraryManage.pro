@@ -1,10 +1,13 @@
+
 QT += qml quick
 
 CONFIG += c++11
 
 SOURCES += main.cpp \
     source/userbll.cpp \
-    source/bookbll.cpp
+    source/bookbll.cpp \
+    source/usermodelbll.cpp \
+    source/loginbll.cpp
 
 RESOURCES += qml.qrc
 
@@ -33,4 +36,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 HEADERS += \
     header/usermodelbll.h \
     header/userbll.h \
-    header/bookbll.h
+    header/bookbll.h \
+    header/searchbll.h \
+    header/universaltool.h \
+    header/loginbll.h \
+    header/demo.h

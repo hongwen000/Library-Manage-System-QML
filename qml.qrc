@@ -1,5 +1,8 @@
 <RCC>
     <qresource prefix="/">
         <file>qtquickcontrols2.conf</file>
+        <file>main.qml</file>
+        <file>LoginPage.qml</file>
+        <file>BookListBase.qml</file>
     </qresource>
 </RCC>
