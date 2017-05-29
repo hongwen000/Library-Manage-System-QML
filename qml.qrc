@@ -4,5 +4,10 @@
         <file>main.qml</file>
         <file>LoginPage.qml</file>
         <file>BookListBase.qml</file>
+        <file>ui/AllBooks1.qml</file>
+        <file>img/1234567890.jpg</file>
+        <file>img/9876543210.jpg</file>
+        <file>SearchBox.qml</file>
+        <file>BookInfoBase.qml</file>
     </qresource>
 </RCC>

@@ -369,9 +369,9 @@ ApplicationWindow {
                     // selectedComponent will always be valid, as it defaults to the first component
                     source: {
                         if (navDrawer.enabled) {
-                            return Qt.resolvedUrl("%1BLL.qml").arg(main.selectedComponent.replace(" ", ""))
+                            return Qt.resolvedUrl("qrc:/ui/%1.qml").arg(main.selectedComponent.replace(" ", ""))
                         } else {
-                            return Qt.resolvedUrl("%1BLL.qml").arg(selectedComponent.replace(" ", ""))
+                            return Qt.resolvedUrl("qrc:/ui/%1.qml").arg(selectedComponent.replace(" ", ""))
                         }
                     }
                 }

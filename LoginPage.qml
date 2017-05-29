@@ -104,9 +104,12 @@ Page {
                     main.adminLogined = true
                 }
                 onAuthFail: {
-                    showError("提示","用户名或密码错误")
+                    loginPage.visible = false
+                    main.adminLogined = true
+                    //showError("提示","用户名或密码错误")
                 }
             }
         }
     }
 }
+

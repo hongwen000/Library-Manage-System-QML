@@ -7,16 +7,17 @@
 #include <list>
 #include <QDebug>
 UserModel* connectDBdemo(){
-    User* virutalUser_AllBooks = new User();
+    User* virutalUser_AllBooks = new User("virutalUser_AllBooks");
     User* user1 = new User("user1","user1");
     User* user2 = new User("User2", "User2");
     UserModel* userModel = new UserModel();
     userModel->append(user1);
     userModel->append(user2);
+    userModel->append(virutalUser_AllBooks);
     userModel->setCurrentControlUser(user1);
-    Book* book1 = new Book("1234567890");
-    Book* book2 = new Book("9876543210");
-    Book* book3 = new Book("6666666666");
+    Book* book1 = new Book("1234567890",0,"Effective C++");
+    Book* book2 = new Book("9876543210", 0, "C++ Primer");
+    Book* book3 = new Book("6666666666",1,"Digital Fundenmental");
     book1->bookOutTo(user1);
     book2->bookOutTo(user1);
     book2->bookOutTo(user2);

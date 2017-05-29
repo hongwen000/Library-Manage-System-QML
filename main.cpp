@@ -13,10 +13,14 @@ int main(int argc, char *argv[])
 {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QGuiApplication app(argc, argv);
-
+    QFont font;
+    font.setPointSize(12);
+    font.setFamily("思源宋体");
+    app.setFont(font);
     qmlRegisterType<UserModel>("Backend", 1, 0, "ReaderModel");
     qmlRegisterType<User>("User", 1, 0, "User");
     qmlRegisterType<Login>("Login", 1 , 0, "Login");
+    qRegisterMetaType<Searcher>("Searcher");
     QQmlApplicationEngine* engine = new QQmlApplicationEngine();
     UserModel* userModel = connectDBdemo();
     Login* login = new Login();

@@ -1,4 +1,4 @@
-#ifndef USERMODELBLL_H
+﻿#ifndef USERMODELBLL_H
 #define USERMODELBLL_H
 #include <QModelIndex>
 #include <QAbstractListModel>
@@ -15,7 +15,7 @@ class UserModel : public QAbstractListModel
 {
     Q_OBJECT
     Q_PROPERTY(User* currentControlUser READ currentControlUser WRITE setCurrentControlUser NOTIFY currentControlUserChanged)
-    Q_PROPERTY(Searcher searcher READ searcher WRITE setSearcher NOTIFY searcherChanged)
+    Q_PROPERTY(QString searcher READ searcher WRITE setSearcher NOTIFY searcherChanged)
     Q_PROPERTY(QQmlListProperty<User> userList READ userList NOTIFY userListChanged)
 public:
     //Model Role Property
@@ -29,6 +29,7 @@ public:
     //Overload Virtual Functions in QAbstractListModel
     UserModel(QObject *parent = nullptr){
         Q_UNUSED(parent);
+        connect(this,SIGNAL(searcherChanged()),this,SLOT(onSearcherChanged()));
     }
 
     int rowCount(const QModelIndex & = QModelIndex()) const;
@@ -43,9 +44,9 @@ public:
     //Property handlers in qml
     User *currentControlUser() const;
     void setCurrentControlUser(User *r);
-
-    Searcher searcher() const;
-    void setSearcher(const Searcher&);
+    Q_INVOKABLE void setCurrentControlUser(const QString&);
+    QString searcher() const;
+    void setSearcher(const QString&);
 
     QQmlListProperty<User> userList() {
         return QQmlListProperty<User>(this, m_users);
@@ -53,14 +54,15 @@ public:
 
 signals:
     void currentControlUserChanged();
-    void searcherChanged();
+    Q_INVOKABLE void searcherChanged();
     void userListChanged();
 public slots:
-
+    void onSearcherChanged();
 
 private:
     QList<User*> m_users;
     User *m_currentControlUser;
-    Searcher m_searcher;
+    QString m_searcher;
+    User *searcherBackup = nullptr;
 };
 #endif // USERMODELBLL_H

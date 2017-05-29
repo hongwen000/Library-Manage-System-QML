@@ -10,6 +10,7 @@ class Book: public QObject
     Q_OBJECT
     Q_PROPERTY(QString isbn READ isbn WRITE setIsbn NOTIFY isbnChanged)
     Q_PROPERTY(QString bookName READ bookName WRITE setBookName NOTIFY bookNameChanged)
+    Q_PROPERTY(int type READ type WRITE setType NOTIFY typeChanged)
     Q_PROPERTY(QString author READ author WRITE setAuthor NOTIFY authorChanged)
     Q_PROPERTY(QDate publishDate READ publishDate WRITE setPublishDate NOTIFY publishDateChanged)
     Q_PROPERTY(int totalStock READ totalStock WRITE setTotalStock NOTIFY totalStockChanged)
@@ -18,12 +19,13 @@ class Book: public QObject
     Q_PROPERTY(QVariantList borrower READ borrower WRITE setBorrower NOTIFY borrowerChanged)
     Q_PROPERTY(QVariantList borrowDate READ borrowDate WRITE setBorrowDate NOTIFY borrowDateChanged)
 public:
-    Book(const QString& _isbn = "", const QVariantList& _borrower = QVariantList(), const QVariantList& _borrowDate = QVariantList(), const QString &_bookName="",QString _author = "",
+    Book(const QString& _isbn = "", int _type = 0,  const QString &_bookName="",const QVariantList& _borrower = QVariantList(), const QVariantList& _borrowDate = QVariantList(),QString _author = "",
          const QDate& _publishDate = QDate::currentDate(), int _totalStock = 0, int _avaiStock = 0, int _borrowedNum = 0):
-    m_isbn(_isbn),m_borrower(_borrower), m_borrowDate(_borrowDate), m_bookName(_bookName), m_author(_author), m_publishDate(_publishDate), m_totalStock(_totalStock), m_avaiStock(_avaiStock), m_borrowedNum(_borrowedNum){}
+    m_isbn(_isbn), m_type(_type), m_bookName(_bookName),m_borrower(_borrower), m_borrowDate(_borrowDate), m_author(_author), m_publishDate(_publishDate), m_totalStock(_totalStock), m_avaiStock(_avaiStock), m_borrowedNum(_borrowedNum){}
     Book(const Book& rhs) {
         m_isbn         =rhs.m_isbn       ;
         m_bookName     =rhs.m_bookName   ;
+        m_type         =rhs.m_type       ;
         m_author       =rhs.m_author     ;
         m_publishDate  =rhs.m_publishDate;
         m_totalStock   =rhs.m_totalStock ;
@@ -35,6 +37,7 @@ public:
 
     DEF_PROPERTY_IMPL(QString,isbn,Isbn)
     DEF_PROPERTY_IMPL(QString,bookName,BookName)
+    DEF_PROPERTY_IMPL(int,type,Type)
     DEF_PROPERTY_IMPL(QString,author,Author)
     DEF_PROPERTY_IMPL(QDate,publishDate,PublishDate)
     DEF_PROPERTY_IMPL(int,totalStock, TotalStock)
@@ -50,6 +53,7 @@ public slots:
 
 private:
     QString m_isbn;
+    int m_type;
     QString m_bookName;
     QString m_author;
     QDate m_publishDate;
@@ -58,7 +62,6 @@ private:
     int m_borrowedNum;
     QVariantList m_borrower;
     QVariantList m_borrowDate;
-
 
 signals:
     void isbnChanged();
@@ -70,6 +73,7 @@ signals:
     void borrowedNumChanged();
     void borrowerChanged();
     void borrowDateChanged();
+    void typeChanged();
 
 };
 Q_DECLARE_METATYPE(Book)//元类型注册

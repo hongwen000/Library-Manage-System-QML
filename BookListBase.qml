@@ -6,10 +6,8 @@ import QtQuick 2.7
 import QtQuick.Controls 2.1
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 1.3 as QuickControls
-
 Page {
     id: bookListBase
-
     View {
         anchors {
             fill: parent
@@ -34,7 +32,8 @@ Page {
             action: Action {
                 id: search
                 function receiveKeyword(skeyword) {
-                    userModel.searcher.keyword = skeyword
+                    userModel.searcher = skeyword
+                    userModel.searcherChanged()
                 }
 
                 onTriggered:{
@@ -56,14 +55,14 @@ Page {
                     maximumLineCount: 8
                     Text {
                         id: bookInfoText
-                        text:index  + 1 + qsTr(" : ") + record.isbn
+                        text:index  + 1 + qsTr(" : ") + record.bookName
                         leftPadding: Units.dp(128)
                         topPadding: Units.dp(32)
                         property alias bookInfoText: bookInfoText
                     }
 
                     action: Image {
-                        source: qsTr("qrc:/") + record.isbn + qsTr(".jpg")
+                        source: qsTr("qrc:/img/") + record.isbn + qsTr(".jpg")
                         width: Units.dp(72)
                         height: Units.dp(96)
                         x:bookInfoText.x
@@ -71,7 +70,7 @@ Page {
 
                     }
                     onClicked: {
-                        pageStack.push(Qt.resolvedUrl("BookInfoPage.qml"),{record:record, index:index})
+                        pageStack.push(Qt.resolvedUrl("BookInfoBase.qml"),{record:record, index:index})
                     }
                 }
             }

@@ -1,4 +1,4 @@
-#include "header/usermodelbll.h"
+﻿#include "header/usermodelbll.h"
 #include "header/userbll.h"
 
 int UserModel::rowCount(const QModelIndex & /*parent*/) const
@@ -73,12 +73,48 @@ void UserModel::setCurrentControlUser(User *r)
     emit currentControlUserChanged();
 }
 
-Searcher UserModel::searcher() const
+void UserModel::setCurrentControlUser(const QString &rhs)
+{
+    for(auto i : m_users) {
+        if(i->id() == rhs) {
+            setCurrentControlUser(i);
+        }
+    }
+}
+
+QString UserModel::searcher() const
 {
     return m_searcher;
 }
 
-void UserModel::setSearcher(const Searcher & r)
+void UserModel::setSearcher(const QString & r)
 {
     m_searcher = r;
+}
+
+void UserModel::onSearcherChanged()
+{
+    if(m_searcher == "") {
+        if(searcherBackup != nullptr){
+            setCurrentControlUser(searcherBackup);
+            searcherBackup = nullptr;
+            emit currentControlUserChanged();
+        }
+    }
+    else {
+        if(searcherBackup == nullptr) {
+            searcherBackup = m_currentControlUser;
+        }
+        User* tmpusr = new User();
+        QVariantList tmpRecord;
+        for(auto i: m_currentControlUser->record())
+        {
+            if((qvariant_cast<Book*>(i))->bookName().contains(m_searcher,Qt::CaseInsensitive)){
+                tmpRecord << i;
+            }
+        }
+        tmpusr->setRecord(tmpRecord);
+        m_currentControlUser = tmpusr;
+        emit currentControlUserChanged();
+    }
 }

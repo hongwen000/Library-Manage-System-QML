@@ -1,4 +1,4 @@
-#ifndef SEARCHBLL_H
+﻿#ifndef SEARCHBLL_H
 #define SEARCHBLL_H
 #include "universaltool.h"
 #include <QObject>
@@ -18,8 +18,8 @@ public:
         return *this;
     }
 
-    DEF_PROPERTY_IMPL(QString, keyword, Keyword)
-    DEF_PROPERTY_IMPL(int, bookType, BookType)
+    DEF_INVOKE_PROPERTY_IMPL(QString, keyword, Keyword)
+    DEF_INVOKE_PROPERTY_IMPL(int, bookType, BookType)
 signals:
     void keywordChanged();
     void bookTypeChanged();
