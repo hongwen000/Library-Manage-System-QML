@@ -1,4 +1,3 @@
-﻿import QtQuick 2.0
 import Material 0.2
 import Material.ListItems 0.1 as ListItem
 import Material.Extras 0.1
@@ -7,8 +6,6 @@ import QtQuick 2.7
 import QtQuick.Controls 2.1
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 1.3 as QuickControls
-import "../"
-
 Page {
     Component.onCompleted: userModel.setCurrentControlUser("virutalUser_AllBooks")
 
@@ -76,7 +73,7 @@ Page {
                         y:bookInfoText.y - Units.dp(20)
                     }
                     onClicked: {
-                        pageStack.push(Qt.resolvedUrl("qrc:/BookInfoBase.qml"),{record:record, index:index})
+                        pageStack.push(Qt.resolvedUrl("BookManage.qml"),{record:record, index:index})
                     }
                 }
             }

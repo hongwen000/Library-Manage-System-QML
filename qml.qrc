@@ -5,9 +5,21 @@
         <file>LoginPage.qml</file>
         <file>BookListBase.qml</file>
         <file>ui/AllBooks1.qml</file>
-        <file>img/1234567890.jpg</file>
-        <file>img/9876543210.jpg</file>
         <file>SearchBox.qml</file>
         <file>BookInfoBase.qml</file>
+        <file>ui/CurrentBorrow1.qml</file>
+        <file>img/9780132359238.jpg</file>
+        <file>img/9787121029097.jpg</file>
+        <file>img/9787121155352.jpg</file>
+        <file>ui/BookInfoBorrowed.qml</file>
+        <file>ui/BasicInfo1.qml</file>
+        <file>ui/NewBook1.qml</file>
+        <file>ui/ManageAll1.qml</file>
+        <file>ui/BookManage.qml</file>
+        <file>ui/NewUser1.qml</file>
+        <file>ui/ManageUser1.qml</file>
+        <file>ManageUsers.qml</file>
+        <file>ui/HelpReturn1.qml</file>
+        <file>ui/HelpReturnSub.qml</file>
     </qresource>
 </RCC>

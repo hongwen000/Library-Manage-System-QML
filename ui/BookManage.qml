@@ -1,4 +1,4 @@
-﻿import QtQuick.Layouts 1.1
+import QtQuick.Layouts 1.1
 import QtQuick 2.4
 import Material 0.2
 import Material.ListItems 0.1 as ListItem
@@ -10,7 +10,7 @@ Page {
     property var record: undefined
     property var index: undefined
     title: record.bookName
-    property bool non_editMode: true
+    property bool non_editMode: false
 
     View {
         anchors.centerIn: parent
@@ -161,30 +161,17 @@ Page {
                 }
 
                 Button {
-                    text: "借阅"
+                    text: "上架"
                     textColor: Theme.primaryColor
-                    onClicked: {
-                        console.log(loginBLLIdthis.usrname)
-                        var n = userModel.find(loginBLLIdthis.usrname)
-                        if(!(n == -1)) {
-                            if(record.avaiStock >= 1) {
-                                if(record.alreadyBorrowed(userModel.at(1)))
-                                    showError("提示", "您之前已经借阅该本图书")
-                                else {
-                                record.bookOutTo(userModel.at(1))
-                                showError("提示", "借阅成功")
-                                }
-                            }
-                            else
-                                showError("提示","本书所有馆藏均已被借出")
-                        }
-                    }
                 }
-
-//                Button {
-//                    text: "归还"
-//                    textColor: Theme.primaryColor
-//                }
+                Button {
+                    text: "下架"
+                    textColor: Theme.primaryColor
+                }
+                Button {
+                    text: "修改"
+                    textColor: Theme.primaryColor
+                }
             }
         }
     }

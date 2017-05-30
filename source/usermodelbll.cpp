@@ -1,6 +1,6 @@
 ﻿#include "header/usermodelbll.h"
 #include "header/userbll.h"
-
+#include <QDebug>
 int UserModel::rowCount(const QModelIndex & /*parent*/) const
 {
    return m_users.count();
@@ -62,13 +62,28 @@ void UserModel::remove(int row)
     endRemoveRows();
 }
 
-User *UserModel::currentControlUser() const
+int UserModel::find(const QString &rhs)
+{
+    for(auto it = m_users.begin(); it != m_users.end(); ++it) {
+        if((*it)->id() == rhs)
+            return it - m_users.begin();
+    }
+    return -1;
+}
+
+ QVariant UserModel::at(int n)
+{
+    return QVariant::fromValue(m_users[n]);
+}
+
+User* UserModel::currentControlUser() const
 {
     return m_currentControlUser;
 }
 
 void UserModel::setCurrentControlUser(User *r)
 {
+    qInfo() <<"Now it's me" << r->id();
     m_currentControlUser = r;
     emit currentControlUserChanged();
 }
@@ -94,8 +109,10 @@ void UserModel::setSearcher(const QString & r)
 
 void UserModel::onSearcherChanged()
 {
+    qDebug() << "Searcher changed slot is trigged";
     if(m_searcher == "") {
         if(searcherBackup != nullptr){
+            qDebug() << "Searcher changed slot setCurrentControlUser to " << searcherBackup;
             setCurrentControlUser(searcherBackup);
             searcherBackup = nullptr;
             emit currentControlUserChanged();

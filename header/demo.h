@@ -6,6 +6,8 @@
 #include <string>
 #include <list>
 #include <QDebug>
+#include <QObject>
+#include <QString>
 UserModel* connectDBdemo(){
     User* virutalUser_AllBooks = new User("virutalUser_AllBooks");
     User* user1 = new User("user1","user1");
@@ -15,15 +17,17 @@ UserModel* connectDBdemo(){
     userModel->append(user2);
     userModel->append(virutalUser_AllBooks);
     userModel->setCurrentControlUser(user1);
-    Book* book1 = new Book("1234567890",0,"Effective C++");
-    Book* book2 = new Book("9876543210", 0, "C++ Primer");
-    Book* book3 = new Book("6666666666",1,"Digital Fundenmental");
+    Book* book1 = new Book("9787121029097",0,"Effective C++",QVariantList(),QVariantList(),"Scott Meyers",QDate(2006,7,1),5,5,0);
+    Book* book2 = new Book("9787121155352", 0, "C++ Primer",QVariantList(),QVariantList(),"Stanley B Lippman", QDate(2013,9,1),5,5,0);
+    Book* book3 = new Book("9780132359238",1,QObject::tr("Digital Fundamentals"),QVariantList(),QVariantList(),QObject::tr("Thomas L Floyd"),QDate(2006,6,1),5,5,0);
+    Book* book4 = new Book("9787100013239",0,"GEB",QVariantList(),QVariantList(),"Douglas Richard Hofstadter",QDate(1997,5,1),5,5,0);
     book1->bookOutTo(user1);
     book2->bookOutTo(user1);
     book2->bookOutTo(user2);
     book1->bookOutTo(virutalUser_AllBooks);
     book2->bookOutTo(virutalUser_AllBooks);
     book3->bookOutTo(virutalUser_AllBooks);
+    book4->bookOutTo(virutalUser_AllBooks);
     return userModel;
 }
 QVariantList connectSecurityDemo() {

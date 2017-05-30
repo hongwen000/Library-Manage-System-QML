@@ -1,17 +1,20 @@
-﻿import QtQuick 2.0
-import Material 0.2
-import Material.ListItems 0.1 as ListItem
-import Material.Extras 0.1
 import Backend 1.0
 import QtQuick 2.7
 import QtQuick.Controls 2.1
-import QtQuick.Layouts 1.1
 import QtQuick.Controls 1.3 as QuickControls
 import "../"
+import QtQuick.Layouts 1.1
+import Material 0.2
+import Material.ListItems 0.1 as ListItem
+import Material.Extras 0.1
 
 Page {
-    Component.onCompleted: userModel.setCurrentControlUser("virutalUser_AllBooks")
-
+    property var record: undefined
+    property var index: undefined
+    Component.onCompleted: {
+        console.log("Pretty Pretty, I am as " + record.id)
+        userModel.setCurrentControlUser(record)
+    }
     id: bookListBase
     View {
         anchors {
@@ -76,10 +79,13 @@ Page {
                         y:bookInfoText.y - Units.dp(20)
                     }
                     onClicked: {
-                        pageStack.push(Qt.resolvedUrl("qrc:/BookInfoBase.qml"),{record:record, index:index})
                     }
                 }
             }
         }
     }
 }
+
+//BookListBase{
+
+//}

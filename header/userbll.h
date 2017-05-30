@@ -3,6 +3,7 @@
 #include <QObject>
 #include <QVariantList>
 #include "universaltool.h"
+#include <QDebug>
 class Book;
 class User: public QObject
 {
@@ -34,13 +35,15 @@ public:
         m_record   =rhs.m_record  ;
     }
 
+    ~User(){
+        qDebug() << "I am desturcted, help";
+    }
     DEF_PROPERTY_IMPL(QString, id, Id)
     DEF_PROPERTY_IMPL(QString, password,Password)
     DEF_PROPERTY_IMPL(QString, name, Name)
     DEF_PROPERTY_IMPL(QString, email, Email)
     DEF_PROPERTY_IMPL(QString, phone, Phone)
     DEF_PROPERTY_IMPL(QVariantList, record, Record)
-
     Q_INVOKABLE void borrowBook(Book* _book);
     Q_INVOKABLE void returnBook(Book* _book);
 

@@ -1,10 +1,11 @@
 ﻿#include "header/userbll.h"
 #include "header/bookbll.h"
 #include <QVariant>
-
+#include <QDebug>
 
 void User::borrowBook(Book *_book)
 {
+    qInfo() << "It's me, " << id() << "borrowing the book";
     m_record << QVariant::fromValue(_book);
 }
 

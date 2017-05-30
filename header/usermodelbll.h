@@ -40,7 +40,8 @@ public:
     Q_INVOKABLE void append(User* user);
     Q_INVOKABLE void set(int row, User* user);
     Q_INVOKABLE void remove(int row);
-
+    Q_INVOKABLE int find(const QString&);
+    Q_INVOKABLE QVariant at(int n);
     //Property handlers in qml
     User *currentControlUser() const;
     void setCurrentControlUser(User *r);
@@ -51,6 +52,7 @@ public:
     QQmlListProperty<User> userList() {
         return QQmlListProperty<User>(this, m_users);
     }
+
 
 signals:
     void currentControlUserChanged();

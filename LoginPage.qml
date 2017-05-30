@@ -75,6 +75,7 @@ Page {
             Button {
                 id: loginButton
                 text: qsTr("登陆")
+
                 onClicked: {
                     loginBLLIdthis.setSecurityDB(login.securityDB)
                     loginBLLIdthis.auth()

@@ -10,8 +10,7 @@ import QtQuick.Controls 1.3 as QuickControls
 import "../"
 
 Page {
-    Component.onCompleted: userModel.setCurrentControlUser("virutalUser_AllBooks")
-
+    Component.onCompleted: userModel.setCurrentControlUser(loginBLLIdthis.usrname)
     id: bookListBase
     View {
         anchors {
@@ -76,10 +75,14 @@ Page {
                         y:bookInfoText.y - Units.dp(20)
                     }
                     onClicked: {
-                        pageStack.push(Qt.resolvedUrl("qrc:/BookInfoBase.qml"),{record:record, index:index})
+                        pageStack.push(Qt.resolvedUrl("qrc:/ui/BookInfoBorrowed.qml"),{record:record, index:index})
                     }
                 }
             }
         }
     }
 }
+
+//BookListBase{
+
+//}

@@ -34,9 +34,11 @@ Page {
                 function receiveKeyword(skeyword) {
                     userModel.searcher = skeyword
                     userModel.searcherChanged()
+                    loader.active = false
                 }
 
                 onTriggered:{
+                    loader.active = true
                     loader.source = ""
                     loader.source = "SearchBox.qml"
                     loader.item.clicked.connect(receiveKeyword)
@@ -67,7 +69,6 @@ Page {
                         height: Units.dp(96)
                         x:bookInfoText.x
                         y:bookInfoText.y - Units.dp(20)
-
                     }
                     onClicked: {
                         pageStack.push(Qt.resolvedUrl("BookInfoBase.qml"),{record:record, index:index})

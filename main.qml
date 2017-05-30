@@ -19,45 +19,24 @@ ApplicationWindow {
         tabHighlightColor: "white"
     }
     property var currentBorrow: [
-        qsTr("CurrentBorrow"), qsTr("HistoryBorrow"), qsTr("Appointment"), qsTr("Overdue")
+        qsTr("CurrentBorrow")/*, qsTr("HistoryBorrow"), qsTr("Appointment"), qsTr("Overdue")*/
     ]
 
     property var newBorrow: [
-        qsTr("AllBooks"), qsTr("ChineseBooks"), qsTr("ForeignBooks"), qsTr("Subscriptions")
+        qsTr("AllBooks")/*, qsTr("ChineseBooks"), qsTr("ForeignBooks"), qsTr("Subscriptions")*/
     ]
 
     property var personalInfo: [
-        qsTr("BasicInfo"), qsTr("ContactInfo"), qsTr("ManageMentInfo")
+        qsTr("BasicInfo")/*, qsTr("ContactInfo"), qsTr("ManageMentInfo")*/
     ]
 
     property var bookManage: [
-        qsTr("NewBook"), qsTr("ManageAll"), qsTr("ManageChs"), qsTr("ManageFori"), qsTr("ManageSub")
+        qsTr("NewBook"), qsTr("ManageAll")/*, qsTr("ManageChs"), qsTr("ManageFori"), qsTr("ManageSub")*/
     ]
 
     property var userManage: [
         qsTr("NewUser"),qsTr("ManageUser"), qsTr("HelpReturn")
     ]
-    property var translationTerm: {
-        'CurrentBorrow': '目前借阅',
-        'HistoryBorrow': '借阅历史',
-        'Appointment': '预约请求',
-        'Overdue': '当前过期外借欠款',
-        'AllBooks': '全部文献',
-        'ChineseBooks': '中文目录',
-        'ForeignBooks': '西文目录',
-        'Subscriptions': '征订目录',
-        'BasicInfo': '基本信息',
-        'ContactInfo': '联系方式',
-        'ManageMentInfo': '管理信息',
-        'NewBook': '上架新书',
-        'ManageAll': '全部文献管理',
-        'ManageChs': '中文目录管理',
-        'ManageFori': '西文目录管理',
-        'ManageSub': '征订目录管理',
-        'NewUser': '新增用户',
-        'ManageUser': '管理用户',
-        'HelpReturn': '帮助还书'
-    }
 
     property var usrSections: [ newBorrow, currentBorrow, personalInfo ]
 
@@ -102,9 +81,10 @@ ApplicationWindow {
 
     property var selectedComponent: (usrLogined || adminLogined) ? realsections[0][0] :""
 
+
     initialPage:TabbedPage {
         id: page
-        title: "图书管理系统"
+        title: getTrans(selectedComponent)
         property alias pagethis: page
         actionBar.maxActionCount: navDrawer.enabled ? 3 : 4
         actions: [
@@ -124,6 +104,7 @@ ApplicationWindow {
                 iconName: "action/settings"
                 name: "Settings"
                 hoverAnimation: true
+                onTriggered: showError("提示","本程序完整功能仍在建设中")
             },
 
             Action {
@@ -133,27 +114,127 @@ ApplicationWindow {
             },
 
             Action {
-                iconName: "action/language"
-                name: "语言"
-                enabled: false
-            },
+                iconName: "action/exit_to_app"
+                name: "退出"
+                enabled: true
+                onTriggered: Qt.quit()
+            }
 
-            Action {
+/*            Action {
                 iconName: "action/account_circle"
                 name: "注销"
                 onTriggered: {
                 main.usrLogined = false
                 main.adminLogined = false
+                smallLoader.active = false
                 loginPage.visible = true
                 //iLoginPage.logout()
                 }
+
             }
+            */
         ]
 
         backAction: navDrawer.action
+
         LoginPage  {
             id:loginPage
         }
+//        Loader {
+//            id: example
+//            anchors.fill: parent
+//            asynchronous: true
+//            visible: status == Loader.Ready
+//            // selectedComponent will always be valid, as it defaults to the first component
+//            source: {
+//                if (navDrawer.enabled) {
+//                    return Qt.resolvedUrl("qrc:/ui/%1.qml").arg(main.selectedComponent.replace(" ", ""))
+//                } else {
+//                    return Qt.resolvedUrl("qrc:/ui/%1.qml").arg(selectedComponent.replace(" ", ""))
+//                }
+//            }
+//        }
+
+//        ProgressCircle {
+//            anchors.centerIn: parent
+//            visible: example.status == Loader.Loading
+//        }
+
+//        NavigationDrmawer {
+//            id: navDrawer
+//            enabled: true//page.width < Units.dp(500)
+
+
+
+
+//            onEnabledChanged: smallLoader.active = enabled
+
+//            Flickable {
+//                anchors.fill: parent
+//                id : iamgood
+
+
+//                contentHeight: Math.max(content.implicitHeight, height)
+
+//                Column {
+//                    id: content
+//                    anchors.fill: parent
+
+//                    Repeater {
+//                        //model: sections
+//                        model: realsections
+//                        delegate: Column {
+//                            width: parent.width
+
+//                            ListItem.Subheader {
+//                                text: (usrLogined || adminLogined) ? realSectionTitles[index] : ""
+//                            }
+
+//                            Repeater {
+
+//                                model: modelData
+//                                delegate: ListItem.Standard {
+//                                    function getRightSource() {
+//                                        if (navDrawer.enabled) {
+//                                            return Qt.resolvedUrl("qrc:/ui/%1.qml").arg(main.selectedComponent.replace(" ", ""))
+//                                        } else {
+//                                            return Qt.resolvedUrl("qrc:/ui/%1.qml").arg(selectedComponent.replace(" ", ""))
+//                                        }
+//                                    }
+//                                    text: getTrans(modelData)
+//                                    selected: modelData == main.selectedComponent
+//                                    onClicked: {
+//                                        console.log("at line 207, changing source to " + getRightSource())
+//                                        main.selectedComponent = modelData
+//                                        example.source = ""
+//                                        example.source = getRightSource()
+//                                        navDrawer.close()
+//                                    }
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//            Flickable {
+
+//                id: flickable
+//                anchors {
+//                    left: sidebar.right
+//                    right: parent.right
+//                    top: parent.top
+
+//                    bottom: parent.bottom
+//                    //fill: parent
+//                }
+//                clip: true
+//                contentHeight: Math.max(example.implicitHeight + 40, height)
+//            }
+//            Scrollbar {
+//                flickableItem: flickable
+//            }
+
+//        }
         NavigationDrawer {
             id: navDrawer
             enabled: page.width < Units.dp(500)
@@ -176,16 +257,16 @@ ApplicationWindow {
                             width: parent.width
 
                             ListItem.Subheader {
-                                text: (usrLogined || adminLogined) ? realSectionTitles[index] : ""
+                                text: realSectionTitles[index]
                             }
 
                             Repeater {
                                 model: modelData
                                 delegate: ListItem.Standard {
                                     text: modelData
-                                    selected: modelData == main.selectedComponent
+                                    selected: modelData == demo.selectedComponent
                                     onClicked: {
-                                        main.selectedComponent = modelData
+                                        demo.selectedComponent = modelData
                                         navDrawer.close()
                                     }
                                 }
@@ -195,7 +276,6 @@ ApplicationWindow {
                 }
             }
         }
-
         Repeater {
             //model: !navDrawer.enabled ? sections : 0
             model:  !navDrawer.enabled ? realsections : 0
@@ -329,7 +409,13 @@ ApplicationWindow {
     Component {
         id: tabDelegate
         Item {
-
+            function getRightSource() {
+                if (navDrawer.enabled) {
+                    return Qt.resolvedUrl("qrc:/ui/%1.qml").arg(main.selectedComponent.replace(" ", ""))
+                } else {
+                    return Qt.resolvedUrl("qrc:/ui/%1.qml").arg(selectedComponent.replace(" ", ""))
+                }
+            }
             Sidebar {
                 id: sidebar
 
@@ -343,15 +429,21 @@ ApplicationWindow {
                         delegate: ListItem.Standard {
                             text: getTrans(modelData)
                             selected: modelData == selectedComponent
+                            id: magicOperate
                             onClicked: {
+                                console.log("at line 345")
                                 selectedComponent = modelData
+                                example.source = ""
+                                example.source = getRightSource()
                                 console.log(getTrans(modelData))
                             }
                         }
                     }
                 }
             }
+            property alias example: example
             Flickable {
+
                 id: flickable
                 anchors {
                     left: sidebar.right
