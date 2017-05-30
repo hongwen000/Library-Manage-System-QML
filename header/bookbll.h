@@ -47,10 +47,10 @@ public:
     DEF_PROPERTY_IMPL(QVariantList,borrowDate,BorrowDate)
 
     Q_INVOKABLE void bookOutTo(User* _borrower);
-    Q_INVOKABLE void bookOutTo(QVariant _borrower);
     //Q_INVOKABLE void bookOutTo(const QString& _borrower, );
     Q_INVOKABLE void bookReturnIn(User* _borrower);
     Q_INVOKABLE bool alreadyBorrowed(User* _borrower);
+    Q_INVOKABLE int findBorrowerIndex(User* _borrower);
 public slots:
 
 

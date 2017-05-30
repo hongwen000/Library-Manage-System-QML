@@ -114,8 +114,11 @@ Page {
                     anchors.centerIn: parent
                     width: parent.width
                     readOnly: non_editMode
-
-                    placeholderText: "还书日期"
+                    text: {
+                        var p = userModel.find(loginBLLIdthis.usrname)
+                        var returnDate = record.borrowDate[record.findBorrowerIndex(p)]
+                        returnDate.toLocaleString(Qt.locale("zh_CN"), "yyyy-MM-dd")
+                    }
                 }
             }
 
@@ -136,6 +139,12 @@ Page {
                 Button {
                     text: "归还"
                     textColor: Theme.primaryColor
+                    onClicked: {
+                        var p = userModel.find(loginBLLIdthis.usrname)
+                        console.log("it is " + p.id + " trying to return book")
+                        record.bookReturnIn(p)
+                        showError("提示","归还成功，请刷新上一页面查看结果")
+                }
                 }
             }
         }

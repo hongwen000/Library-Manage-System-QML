@@ -27,8 +27,11 @@ int main(int argc, char *argv[])
     login->setSecurityDB(connectSecurityDemo());
     login->setProperty("usrLogined", false);
     login->setProperty("adminLogined", false);
+    User* protectBookPointer = new User();
     engine->rootContext()->setContextProperty("userModel", userModel);
+    QQmlEngine::setObjectOwnership(userModel, QQmlEngine::CppOwnership);
     engine->rootContext()->setContextProperty("login", login);
+    engine->rootContext()->setContextProperty("protectBookPointer",protectBookPointer);
 
     engine->load(QUrl(QLatin1String("qrc:/main.qml")));
 

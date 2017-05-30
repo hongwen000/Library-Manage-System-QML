@@ -7,10 +7,11 @@ import Material.Extras 0.1
 Item {
     property var record: undefined
     property var index: undefined
+    Component.onCompleted: userModel.setCurrentControlUser(loginBLLIdthis.usrname)
 
     View {
         anchors.centerIn: parent
-        Component.onCompleted: userModel.setCurrentControlUser(record)
+        //Component.onCompleted: userModel.setCurrentControlUser(record)
         width: Units.dp(350)
         height: column.implicitHeight + Units.dp(32)
 
@@ -54,20 +55,22 @@ Item {
                     anchors.centerIn: parent
                     width: parent.width
                     readOnly: true
-                    text: userModel.setCurrentControlUser.id
+                    text: userModel.currentControlUser.id
                 }
             }
             ListItem.Standard {
+
                 action: Icon {
                     anchors.centerIn: parent
                     name: "action/account_circle"
                 }
 
                 content: TextField {
+                    id: nameInput
                     anchors.centerIn: parent
                     width: parent.width
 
-                    text: userModel.setCurrentControlUser.name
+                    text: userModel.currentControlUser.name
                 }
             }
             ListItem.Standard {
@@ -77,10 +80,11 @@ Item {
                 }
 
                 content: TextField {
+                    id: passwordInput
                     anchors.centerIn: parent
                     width: parent.width
 
-                    text: userModel.setCurrentControlUser.password
+                    text: userModel.currentControlUser.password
                 }
             }
 
@@ -93,9 +97,10 @@ Item {
                 }
 
                 content: TextField {
+                    id: emailInput
                     anchors.centerIn: parent
                     width: parent.width
-                    text: userModel.setCurrentControlUser.email
+                    text: userModel.currentControlUser.email
                 }
             }
 
@@ -116,7 +121,12 @@ Item {
                 Button {
                     text: "修改"
                     textColor: Theme.primaryColor
-
+                    onClicked: {
+                        userModel.currentControlUser.name = nameInput.text
+                        userModel.currentControlUser.password = passwordInput.text
+                        userModel.currentControlUser.email = emailInput.text
+                        showError("提示", "保存成功")
+                    }
                 }
             }
         }

@@ -62,19 +62,15 @@ void UserModel::remove(int row)
     endRemoveRows();
 }
 
-int UserModel::find(const QString &rhs)
+User* UserModel::find(const QString &rhs)
 {
-    for(auto it = m_users.begin(); it != m_users.end(); ++it) {
-        if((*it)->id() == rhs)
-            return it - m_users.begin();
+    for(auto i : m_users) {
+        if(i->id() == rhs)
+            return i;
     }
-    return -1;
+    return 0;
 }
 
- QVariant UserModel::at(int n)
-{
-    return QVariant::fromValue(m_users[n]);
-}
 
 User* UserModel::currentControlUser() const
 {

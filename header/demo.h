@@ -10,8 +10,11 @@
 #include <QString>
 UserModel* connectDBdemo(){
     User* virutalUser_AllBooks = new User("virutalUser_AllBooks");
-    User* user1 = new User("user1","user1");
-    User* user2 = new User("User2", "User2");
+    User* user1 = new User("user1","user1",QVariantList(),"Li Xinrui","hongwen000@outlook.con","18888888888");
+    User* user2 = new User("user2", "user2",QVariantList(),"Li Xinrui Admin","hongwen000@outlook.con","18888888888");
+    QQmlEngine::setObjectOwnership(user1, QQmlEngine::CppOwnership);
+    QQmlEngine::setObjectOwnership(user2, QQmlEngine::CppOwnership);
+    QQmlEngine::setObjectOwnership(virutalUser_AllBooks, QQmlEngine::CppOwnership);
     UserModel* userModel = new UserModel();
     userModel->append(user1);
     userModel->append(user2);
@@ -21,6 +24,11 @@ UserModel* connectDBdemo(){
     Book* book2 = new Book("9787121155352", 0, "C++ Primer",QVariantList(),QVariantList(),"Stanley B Lippman", QDate(2013,9,1),5,5,0);
     Book* book3 = new Book("9780132359238",1,QObject::tr("Digital Fundamentals"),QVariantList(),QVariantList(),QObject::tr("Thomas L Floyd"),QDate(2006,6,1),5,5,0);
     Book* book4 = new Book("9787100013239",0,"GEB",QVariantList(),QVariantList(),"Douglas Richard Hofstadter",QDate(1997,5,1),5,5,0);
+    QQmlEngine::setObjectOwnership(book1, QQmlEngine::CppOwnership);
+    QQmlEngine::setObjectOwnership(book2, QQmlEngine::CppOwnership);
+    QQmlEngine::setObjectOwnership(book3, QQmlEngine::CppOwnership);
+    QQmlEngine::setObjectOwnership(book4, QQmlEngine::CppOwnership);
+
     book1->bookOutTo(user1);
     book2->bookOutTo(user1);
     book2->bookOutTo(user2);
