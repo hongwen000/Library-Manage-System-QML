@@ -21,5 +21,9 @@
         <file>ManageUsers.qml</file>
         <file>ui/HelpReturn1.qml</file>
         <file>ui/HelpReturnSub.qml</file>
+        <file>img/9787100013239.jpg</file>
+        <file>ui/HelpBorrow1.qml</file>
+        <file>ui/HelpBorrowSub.qml</file>
+        <file>db/library.db</file>
     </qresource>
 </RCC>

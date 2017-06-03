@@ -1,13 +1,15 @@
 
 QT += qml quick
-
+QT += sql
 CONFIG += c++11
 
 SOURCES += main.cpp \
     source/userbll.cpp \
     source/bookbll.cpp \
     source/usermodelbll.cpp \
-    source/loginbll.cpp
+    source/loginbll.cpp \
+    source/updatedbdcl.cpp \
+    source/connectdbdcl.cpp
 
 RESOURCES += qml.qrc
 
@@ -40,4 +42,6 @@ HEADERS += \
     header/searchbll.h \
     header/universaltool.h \
     header/loginbll.h \
-    header/demo.h
+    header/demo.h \
+    header/connectdbdcl.h \
+    header/updatedbdcl.h

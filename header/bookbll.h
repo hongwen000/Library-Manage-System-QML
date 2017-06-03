@@ -32,9 +32,17 @@ public:
         m_avaiStock    =rhs.m_avaiStock  ;
         m_borrowedNum  =rhs.m_borrowedNum;
         m_borrower     =rhs.m_borrower   ;
-        m_borrowDate   =rhs.m_borrowDate ;
+        m_borrowDate   =rhs.m_borrowDate ;            
     }
-
+    
+    ~Book() {
+        qInfo() << "Well, now I " << m_bookName << "is going to be down";
+        for(auto usr : m_borrower) {
+            qInfo() << "I will erase myself from user " << qvariant_cast<User*>(usr)->id();
+            bookReturnIn(qvariant_cast<User*>(usr));
+        }
+    }
+    
     DEF_PROPERTY_IMPL(QString,isbn,Isbn)
     DEF_PROPERTY_IMPL(QString,bookName,BookName)
     DEF_PROPERTY_IMPL(int,type,Type)
@@ -46,11 +54,14 @@ public:
     DEF_PROPERTY_IMPL(QVariantList,borrower,Borrower)
     DEF_PROPERTY_IMPL(QVariantList,borrowDate,BorrowDate)
 
+
     Q_INVOKABLE void bookOutTo(User* _borrower);
-    //Q_INVOKABLE void bookOutTo(const QString& _borrower, );
     Q_INVOKABLE void bookReturnIn(User* _borrower);
     Q_INVOKABLE bool alreadyBorrowed(User* _borrower);
     Q_INVOKABLE int findBorrowerIndex(User* _borrower);
+    Q_INVOKABLE void deconstruct();
+    Q_INVOKABLE void edit(const QString& _bookName, const QString& _author, const QDate& _publishDate, int _totalStock, int _avaiStock);
+    void bookOutTo(User *_borrower, QDate _borrowDate);
 public slots:
 
 

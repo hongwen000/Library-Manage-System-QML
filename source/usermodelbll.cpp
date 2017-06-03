@@ -1,5 +1,6 @@
 ﻿#include "header/usermodelbll.h"
 #include "header/userbll.h"
+#include "header/updatedbdcl.h"
 #include <QDebug>
 int UserModel::rowCount(const QModelIndex & /*parent*/) const
 {
@@ -69,6 +70,45 @@ User* UserModel::find(const QString &rhs)
             return i;
     }
     return 0;
+}
+
+void UserModel::addUser(const QString &_id, const QString &_name, const QString &_password, const QString& _email, const QString& _type)
+{
+    User* newUser = new User(_id, _password, QVariantList(), _name, _email, _type);
+    QQmlEngine::setObjectOwnership(newUser, QQmlEngine::CppOwnership);
+    append(newUser);
+    emit userListChanged();
+    addUserDCL(_id,_name,_password,_email,_type);
+}
+
+void UserModel::editUser(User *record, const QString &_name, const QString &_password, const QString &_email, const QString& _type)
+{
+    record->setName(_name);
+    record->setPassword(_password);
+    record->setEmail(_email);
+    record->setType(_type);
+    editUserDCL(record->id(),_name,_password,_email,_type);
+}
+
+void UserModel::removeUser(User *record)
+{
+    for(int i = 0; i < m_users.count(); ++i) {
+        if(record == m_users[i]) {
+            for(QVariant bookBorrowed : record->record())
+                qvariant_cast<Book*>(bookBorrowed)->bookReturnIn(record);
+            removeUserDCL(record->id());
+            remove(i);
+        }
+    }
+}
+
+void UserModel::addBook(const QString &_bookName, const QString &_author, const QString &_isbn, int _totalStock, const QDate &_publishTime)
+{
+    User* pvirutalUser_AllBooks = find("virutalUser_AllBooks");
+    Book* newBook = new Book(_isbn, 0, _bookName, QVariantList(), QVariantList(), _author,_publishTime, _totalStock, _totalStock, 0);
+    QQmlEngine::setObjectOwnership(newBook, QQmlEngine::CppOwnership);
+    addBookDCL(_bookName,_author,_isbn,_totalStock,_publishTime.toString("yyyy-MM-dd"));
+    newBook->bookOutTo(pvirutalUser_AllBooks);
 }
 
 

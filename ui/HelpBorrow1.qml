@@ -39,7 +39,7 @@ Page {
                         property alias bookInfoText: bookInfoText
                     }
                     onClicked: {
-                        pageStack.push(Qt.resolvedUrl("qrc:/ui/HelpReturnSub.qml"),{user:record, index:index})
+                        pageStack.push(Qt.resolvedUrl("qrc:/ui/HelpBorrowSub.qml"),{user:record, index:index})
                     }
                 }
             }

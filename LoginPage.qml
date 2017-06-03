@@ -15,6 +15,8 @@ Page {
         parent.pop()
     }
     GridLayout {
+        width: 307
+        height: 192
         rows: 3
         columns: 2
         anchors.horizontalCenter: parent.horizontalCenter
@@ -33,7 +35,7 @@ Page {
 
         TextField {
             id: usrnameInput
-            font.pointSize: 14
+            font.pointSize: 12
             Layout.preferredHeight: 40
             Layout.preferredWidth: 220
             placeholderText: qsTr("请输入用户名")
@@ -52,7 +54,7 @@ Page {
 
         TextField {
             id: pwdInput
-            font.pointSize: 14
+            font.pointSize: 12
             Layout.preferredHeight: 40
             Layout.preferredWidth: 220
             placeholderText: qsTr("请输入密码")
@@ -105,9 +107,9 @@ Page {
                     main.adminLogined = true
                 }
                 onAuthFail: {
-                    loginPage.visible = false
-                    main.adminLogined = true
-                    //showError("提示","用户名或密码错误")
+                    //loginPage.visible = false
+                    //main.adminLogined = true
+                    showError("提示","用户名或密码错误")
                 }
             }
         }

@@ -56,7 +56,7 @@ Page {
                     onClicked: {
                         console.log("Try : User name is " + user.id)
                         console.log("Book name is " + record.bookName)
-                        record.bookReturnIn(user)
+                        record.bookOutTo(user)
                         bookListBase.pop()
                     }
                 }

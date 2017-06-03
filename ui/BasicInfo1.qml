@@ -103,6 +103,19 @@ Item {
                     text: userModel.currentControlUser.email
                 }
             }
+            ListItem.Standard {
+                action: Icon {
+                    anchors.centerIn: parent
+                    name: "content/flag"
+                }
+
+                content: TextField {
+                    id: typeInput
+                    anchors.centerIn: parent
+                    width: parent.width
+                    text: userModel.currentControlUser.type
+                }
+            }
 
             Item {
                 Layout.fillWidth: true

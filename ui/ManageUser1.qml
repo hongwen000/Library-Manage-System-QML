@@ -39,7 +39,7 @@ Page {
                         property alias bookInfoText: bookInfoText
                     }
                     onClicked: {
-                        pageStack.push(Qt.resolvedUrl("qrc:/ManageUsers.qml"),{specifiedUser:record, index:index})
+                        pageStack.push(Qt.resolvedUrl("qrc:/ManageUsers.qml"),{record:record, index:index})
                     }
                 }
             }

@@ -6,15 +6,14 @@ import Material.Extras 0.1
 
 
 Page {
-    id: bookInfoPage
+    id: userInfoPage
     property var record: undefined
     property var index: undefined
-    title: record.bookName
-    property bool non_editMode: true
+    title: record.id
+    property bool non_editMode: false
 
     View {
         anchors.centerIn: parent
-        Component.onCompleted: userModel.setCurrentControlUser(specifiedUser)
         width: Units.dp(350)
         height: column.implicitHeight + Units.dp(32)
 
@@ -58,20 +57,22 @@ Page {
                     anchors.centerIn: parent
                     width: parent.width
                     readOnly: true
-                    text: userModel.setCurrentControlUser.id
+                    text: record.id
                 }
             }
             ListItem.Standard {
                 action: Icon {
+
                     anchors.centerIn: parent
                     name: "action/account_circle"
                 }
 
                 content: TextField {
+                    id: nameInput
                     anchors.centerIn: parent
                     width: parent.width
 
-                    text: userModel.setCurrentControlUser.name
+                    text: record.name
                 }
             }
             ListItem.Standard {
@@ -81,10 +82,11 @@ Page {
                 }
 
                 content: TextField {
+                    id: passwordInput
                     anchors.centerIn: parent
                     width: parent.width
 
-                    text: userModel.setCurrentControlUser.password
+                    text: record.password
                 }
             }
 
@@ -92,6 +94,7 @@ Page {
 
             ListItem.Standard {
                 action: Icon {
+                    id: emailInput
                     anchors.centerIn: parent
                     name: "communication/email"
                 }
@@ -99,7 +102,21 @@ Page {
                 content: TextField {
                     anchors.centerIn: parent
                     width: parent.width
-                    text: userModel.setCurrentControlUser.email
+                    text: record.email
+                }
+            }
+
+            ListItem.Standard {
+                action: Icon {
+                    anchors.centerIn: parent
+                    name: "content/flag"
+                }
+
+                content: TextField {
+                    id: typeInput
+                    anchors.centerIn: parent
+                    width: parent.width
+                    text: record.type
                 }
             }
 
@@ -120,7 +137,18 @@ Page {
                 Button {
                     text: "修改"
                     textColor: Theme.primaryColor
-
+                    onClicked: {
+                        userModel.editUser(record,nameInput.text, passwordInput.text, emailInput.text)
+                        showError("提示", "修改成功")
+                    }
+                }
+                Button {
+                    text: "删除"
+                    textColor: Theme.primaryColor
+                    onClicked: {
+                        userModel.removeUser(record)
+                        userInfoPage.pop()
+                    }
                 }
             }
         }

@@ -8,6 +8,7 @@
 #include <QQmlListProperty>
 #include <qqml.h>
 #include <QObject>
+#include <QQmlEngine>
 #include "userbll.h"
 #include "bookbll.h"
 #include "searchbll.h"
@@ -31,16 +32,19 @@ public:
         Q_UNUSED(parent);
         connect(this,SIGNAL(searcherChanged()),this,SLOT(onSearcherChanged()));
     }
-
     int rowCount(const QModelIndex & = QModelIndex()) const;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
     QHash<int, QByteArray> roleNames() const;
-
     Q_INVOKABLE QVariantMap get(int row) const;
     Q_INVOKABLE void append(User* user);
     Q_INVOKABLE void set(int row, User* user);
     Q_INVOKABLE void remove(int row);
+    //Interface in qml
     Q_INVOKABLE User* find(const QString&);
+    Q_INVOKABLE void addUser(const QString &_id = "",  const QString& _name = "", const QString &_password ="", const QString& _email ="", const QString& _type = "user");
+    Q_INVOKABLE void editUser(User* record,  const QString& _name = "", const QString &_password ="", const QString& _email ="", const QString& _type = "user");
+    Q_INVOKABLE void removeUser(User* record);
+    Q_INVOKABLE void addBook(const QString& _bookName, const QString& _author, const QString& _isbn, int _totalStock, const QDate& _publishTime);
     //Property handlers in qml
     User *currentControlUser() const;
     void setCurrentControlUser(User *r);

@@ -6,7 +6,7 @@ import Material.Extras 0.1
 
 
 Page {
-    id: bookInfoPage
+    id: bookManagePage
     property var record: undefined
     property var index: undefined
     title: record.bookName
@@ -23,7 +23,20 @@ Page {
 
         ColumnLayout {
             id: column
+            Dialog {
+                id: datePickerDialog
+                hasActions: true
+                contentMargins: 0
+                floatingActions: true
 
+                DatePicker {
+                    id: datePicker
+                    frameVisible: false
+                    dayAreaBottomMargin : Units.dp(48)
+                    selectedDate: record.publishDate
+                }
+
+            }
             anchors {
                 fill: parent
                 topMargin: Units.dp(16)
@@ -55,6 +68,7 @@ Page {
                 }
 
                 content: TextField {
+                    id: bookNameInput
                     anchors.centerIn: parent
                     width: parent.width
                     readOnly: non_editMode
@@ -69,6 +83,7 @@ Page {
                 }
 
                 content: TextField {
+                    id: authorInput
                     anchors.centerIn: parent
                     width: parent.width
                     readOnly: non_editMode
@@ -82,11 +97,22 @@ Page {
                     name: "action/schedule"
                 }
 
-                content: TextField {
+                content: RowLayout {
                     anchors.centerIn: parent
                     width: parent.width
-                    readOnly: non_editMode
-                    text: record.publishDate.toLocaleString(Qt.locale("zh_CN"), "yyyy-MM-dd")
+                    Button {
+                        Layout.alignment: Qt.AlignVCenter
+                        Layout.preferredWidth: 0.3 * parent.width
+                        text: "选择"
+                        onClicked:datePickerDialog.show()
+                    }
+
+                    TextField {
+                        Layout.alignment: Qt.AlignVCenter
+                        Layout.preferredWidth: 0.7 * parent.width
+                        readOnly: non_editMode
+                        text: Qt.formatDate(datePicker.selectedDate, "yyyy-MM-dd")
+                    }
                 }
             }
 
@@ -99,7 +125,7 @@ Page {
                 content: TextField {
                     anchors.centerIn: parent
                     width: parent.width
-                    readOnly: non_editMode
+                    readOnly: true
                     text: record.isbn
                 }
             }
@@ -111,6 +137,7 @@ Page {
                 }
 
                 content: TextField {
+                    id: totalStockInput
                     anchors.centerIn: parent
                     width: parent.width
                     readOnly: non_editMode
@@ -125,6 +152,7 @@ Page {
                 }
 
                 content: TextField {
+                    id: avaiStockInput
                     anchors.centerIn: parent
                     width: parent.width
                     readOnly: non_editMode
@@ -161,16 +189,22 @@ Page {
                 }
 
                 Button {
-                    text: "上架"
-                    textColor: Theme.primaryColor
-                }
-                Button {
                     text: "下架"
                     textColor: Theme.primaryColor
+                    onClicked: {
+                        record.deconstruct()
+                        showError("提示","归还成功，请返回并刷新页面")
+                        bookManagePage.pop()
+                    }
                 }
                 Button {
                     text: "修改"
                     textColor: Theme.primaryColor
+                    onClicked: {
+                        record.edit(bookNameInput.text, authorInput.text,datePicker.selectedDate, totalStockInput.text, avaiStockInput.text)
+                        showError("提示","修改成功，请返回并刷新页面")
+                        bookManagePage.pop()
+                    }
                 }
             }
         }

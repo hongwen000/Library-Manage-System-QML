@@ -35,7 +35,7 @@ ApplicationWindow {
     ]
 
     property var userManage: [
-        qsTr("NewUser"),qsTr("ManageUser"), qsTr("HelpReturn")
+        qsTr("NewUser"),qsTr("ManageUser"), qsTr("HelpReturn"), qsTr("HelpBorrow")
     ]
 
     property var usrSections: [ newBorrow, currentBorrow, personalInfo ]
@@ -118,9 +118,9 @@ ApplicationWindow {
                 name: "退出"
                 enabled: true
                 onTriggered: Qt.quit()
-            }
+            },
 
-/*            Action {
+            Action {
                 iconName: "action/account_circle"
                 name: "注销"
                 onTriggered: {
@@ -132,7 +132,7 @@ ApplicationWindow {
                 }
 
             }
-            */
+
         ]
 
         backAction: navDrawer.action
@@ -264,9 +264,9 @@ ApplicationWindow {
                                 model: modelData
                                 delegate: ListItem.Standard {
                                     text: modelData
-                                    selected: modelData == demo.selectedComponent
+                                    selected: modelData == main.selectedComponent
                                     onClicked: {
-                                        demo.selectedComponent = modelData
+                                        main.selectedComponent = modelData
                                         navDrawer.close()
                                     }
                                 }
@@ -404,6 +404,8 @@ ApplicationWindow {
             return '管理用户 '
         else if(name == 'HelpReturn')
             return '帮助还书'
+        else if(name == 'HelpBorrow')
+            return '帮助借书'
         else return ''
     }
     Component {

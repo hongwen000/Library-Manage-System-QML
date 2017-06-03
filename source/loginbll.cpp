@@ -40,7 +40,7 @@ void Login::setUsrLogined(bool deter)
 void Login::auth()
 {
     for(auto i : m_securityDB) {
-        QString rightUsername = (i.toHash()).value("useranme").toString();
+        QString rightUsername = (i.toHash()).value("username").toString();
         QString rightPassword = (i.toHash()).value("password").toString();
         QString rightType     = (i.toHash()).value("type").toString();
         if(rightUsername == m_usrname)

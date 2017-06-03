@@ -7,7 +7,6 @@ import Material.Extras 0.1
 Item {
     View {
         anchors.centerIn: parent
-        Component.onCompleted: userModel.setCurrentControlUser(loginBLLIdthis.usrname)
         width: Units.dp(350)
         height: column.implicitHeight + Units.dp(32)
 
@@ -48,22 +47,28 @@ Item {
                 }
 
                 content: TextField {
+                    id: idInput
                     anchors.centerIn: parent
                     width: parent.width
-                    text: userModel.setCurrentControlUser.id
+                    //readOnly: true
+                    //text: userModel.currentControlUser.id
+                    placeholderText: "请输入新用户id"
                 }
             }
             ListItem.Standard {
+
                 action: Icon {
                     anchors.centerIn: parent
                     name: "action/account_circle"
                 }
 
                 content: TextField {
+                    id: nameInput
                     anchors.centerIn: parent
                     width: parent.width
+                    placeholderText: "请输入新用户昵称"
 
-                    text: userModel.setCurrentControlUser.name
+                    //text: userModel.currentControlUser.name
                 }
             }
             ListItem.Standard {
@@ -73,10 +78,12 @@ Item {
                 }
 
                 content: TextField {
+                    id: passwordInput
                     anchors.centerIn: parent
                     width: parent.width
+                    placeholderText: "请输入新用户密码"
 
-                    text: userModel.setCurrentControlUser.password
+                    //text: userModel.currentControlUser.password
                 }
             }
 
@@ -89,12 +96,28 @@ Item {
                 }
 
                 content: TextField {
+                    id: emailInput
                     anchors.centerIn: parent
                     width: parent.width
-                    text: userModel.setCurrentControlUser.email
+                    placeholderText: "请输入新用户邮箱"
+                    //text: userModel.currentControlUser.email
                 }
             }
 
+            ListItem.Standard {
+                action: Icon {
+                    anchors.centerIn: parent
+                    name: "content/flag"
+                }
+
+                content: MenuField {
+                        Layout.alignment: Qt.AlignVCenter
+                        Layout.preferredWidth: 0.5 * parent.width
+
+                        model: ["User", "Admin"]
+                    }
+
+            }
             Item {
                 Layout.fillWidth: true
                 Layout.preferredHeight: Units.dp(8)
@@ -112,6 +135,10 @@ Item {
                 Button {
                     text: "新建"
                     textColor: Theme.primaryColor
+                    onClicked: {
+                        userModel.addUser(idInput.text, nameInput.text, passwordInput.text, emailInput.text)
+                        showError("提示", "成功建立新用户")
+                    }
 
                 }
             }
