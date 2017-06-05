@@ -5,6 +5,48 @@ import Material.ListItems 0.1 as ListItem
 import Material.Extras 0.1
 Item {
     property var non_editMode: false
+    function isValidIsbn (str) {
+        var sum,
+            weight,
+            digit,
+            check,
+            i;
+
+        str = str.replace(/[^0-9X]/gi, '');
+
+        if (str.length != 10 && str.length != 13) {
+            return false;
+        }
+
+        if (str.length == 13) {
+            sum = 0;
+            for (i = 0; i < 12; i++) {
+                digit = parseInt(str[i]);
+                if (i % 2 == 1) {
+                    sum += 3*digit;
+                } else {
+                    sum += digit;
+                }
+            }
+            check = (10 - (sum % 10)) % 10;
+            return (check == str[str.length-1]);
+        }
+
+        if (str.length == 10) {
+            weight = 10;
+            sum = 0;
+            for (i = 0; i < 9; i++) {
+                digit = parseInt(str[i]);
+                sum += weight*digit;
+                weight--;
+            }
+            check = 11 - (sum % 11);
+            if (check == 10) {
+                check = 'X';
+            }
+            return (check == str[str.length-1].toUpperCase());
+        }
+    }
     View {
         anchors.centerIn: parent
         width: Units.dp(350)
@@ -60,10 +102,11 @@ Item {
                 }
 
                 content: TextField {
-                       id:booknameInput
+                    id:booknameInput
                     anchors.centerIn: parent
                     width: parent.width
                     readOnly: non_editMode
+                    maximumLength: 256
                     placeholderText: "请输入新书书名"
                 }
             }
@@ -79,6 +122,7 @@ Item {
                     anchors.centerIn: parent
                     width: parent.width
                     readOnly: non_editMode
+                    maximumLength: 256
                     placeholderText: "请输入新书作者"
                 }
             }
@@ -95,6 +139,8 @@ Item {
                     anchors.centerIn: parent
                     width: parent.width
                     readOnly: non_editMode
+                    maximumLength: 13
+                    validator: RegExpValidator {regExp: /[0-9]+/}
                     placeholderText: "请输入新书ISBN"
                 }
             }
@@ -147,7 +193,10 @@ Item {
                     textColor: Theme.primaryColor
 
                     onClicked: {
-                            userModel.addBook(booknameInput.text, authorInput.text, isbnInput.text, totalstockInput.text, datePicker.selectedDate)
+                            if(!isValidIsbn(isbnInput.text))
+                                showError("提示", "提交失败，ISBN不合法")
+                            else
+                                userModel.addBook(booknameInput.text, authorInput.text, isbnInput.text, totalstockInput.text, datePicker.selectedDate)
                         }
                     }
             }

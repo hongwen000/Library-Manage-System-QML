@@ -12,8 +12,8 @@ Page {
     property var user: undefined
     property var index: undefined
     Component.onCompleted: {
-        console.log("Pretty Pretty, I am as " + user.id)
-        userModel.setCurrentControlUser(user)
+        console.log("Pretty Pretty Brrowing, I am as " + user.id)
+        userModel.setCurrentControlUser("virutalUser_AllBooks")
     }
     id: bookListBase
     View {
@@ -33,7 +33,7 @@ Page {
         Column {
             anchors.fill: parent
             Repeater {
-                model: user.record
+                model: userModel.currentControlUser.record
                 delegate:
                     ListItem.Subtitled {
                     property var record: userModel.currentControlUser.record[index]

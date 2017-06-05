@@ -84,9 +84,10 @@ void UserModel::addUser(const QString &_id, const QString &_name, const QString 
 void UserModel::editUser(User *record, const QString &_name, const QString &_password, const QString &_email, const QString& _type)
 {
     record->setName(_name);
-    record->setPassword(_password);
     record->setEmail(_email);
     record->setType(_type);
+    if(_password != "")
+        record->setPassword(_password);
     editUserDCL(record->id(),_name,_password,_email,_type);
 }
 

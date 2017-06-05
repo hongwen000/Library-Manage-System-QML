@@ -12,7 +12,7 @@ Page {
     property var user: undefined
     property var index: undefined
     Component.onCompleted: {
-        console.log("Pretty Pretty, I am as " + user.id)
+        console.log("Pretty Pretty Returning, I am as " + user.id)
         userModel.setCurrentControlUser(user)
     }
     id: bookListBase

@@ -42,7 +42,7 @@ Page {
                 onTriggered:{
                     loader.active = true
                     loader.source = ""
-                    loader.source = "SearchBox.qml"
+                    loader.source = "qrc:/ui/SearchBox.qml"
                     loader.item.clicked.connect(receiveKeyword)
                 }
                 iconName: "action/search"

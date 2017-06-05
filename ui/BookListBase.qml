@@ -71,7 +71,7 @@ Page {
                         y:bookInfoText.y - Units.dp(20)
                     }
                     onClicked: {
-                        pageStack.push(Qt.resolvedUrl("BookInfoBase.qml"),{record:record, index:index})
+                        pageStack.push(Qt.resolvedUrl("qrc:/ui/BookInfoBase.qml"),{record:record, index:index})
                     }
                 }
             }

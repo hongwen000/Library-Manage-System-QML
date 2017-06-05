@@ -69,7 +69,8 @@ Item {
                     id: nameInput
                     anchors.centerIn: parent
                     width: parent.width
-
+                    maximumLength: 32
+//                    validator: RegExpValidator {regExp: /[a-zA-Z_0-9]+/}
                     text: userModel.currentControlUser.name
                 }
             }
@@ -83,7 +84,8 @@ Item {
                     id: passwordInput
                     anchors.centerIn: parent
                     width: parent.width
-
+                    placeholderText: "******"
+                    maximumLength: 32
                     text: userModel.currentControlUser.password
                 }
             }
@@ -101,6 +103,7 @@ Item {
                     anchors.centerIn: parent
                     width: parent.width
                     text: userModel.currentControlUser.email
+                    validator: RegExpValidator { regExp:/\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/ }
                 }
             }
             ListItem.Standard {
@@ -114,6 +117,7 @@ Item {
                     anchors.centerIn: parent
                     width: parent.width
                     text: userModel.currentControlUser.type
+                    readOnly: true
                 }
             }
 
@@ -135,9 +139,10 @@ Item {
                     text: "修改"
                     textColor: Theme.primaryColor
                     onClicked: {
-                        userModel.currentControlUser.name = nameInput.text
-                        userModel.currentControlUser.password = passwordInput.text
-                        userModel.currentControlUser.email = emailInput.text
+                        userModel.editUser(userModel.currentControlUser,nameInput.text,passwordInput.text,emailInput.text)
+//                        userModel.currentControlUser.name = nameInput.text
+                          //userModel.currentControlUser.password = passwordInput.text
+//                        userModel.currentControlUser.email = emailInput.text
                         showError("提示", "保存成功")
                     }
                 }

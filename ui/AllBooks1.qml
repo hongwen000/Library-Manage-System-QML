@@ -45,7 +45,7 @@ Page {
                 onTriggered:{
                     loader.active = true
                     loader.source = ""
-                    loader.source = "qrc:/SearchBox.qml"
+                    loader.source = "qrc:/ui/SearchBox.qml"
                     loader.item.clicked.connect(receiveKeyword)
                 }
                 iconName: "action/search"
@@ -76,7 +76,7 @@ Page {
                         y:bookInfoText.y - Units.dp(20)
                     }
                     onClicked: {
-                        pageStack.push(Qt.resolvedUrl("qrc:/BookInfoBase.qml"),{record:record, index:index})
+                        pageStack.push(Qt.resolvedUrl("qrc:/ui/BookInfoBase.qml"),{record:record, index:index})
                     }
                 }
             }

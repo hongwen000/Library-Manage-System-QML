@@ -53,6 +53,8 @@ Item {
                     //readOnly: true
                     //text: userModel.currentControlUser.id
                     placeholderText: "请输入新用户id"
+                    maximumLength: 16
+                    validator: RegExpValidator {regExp: /[a-zA-Z_0-9]+/}
                 }
             }
             ListItem.Standard {
@@ -67,7 +69,8 @@ Item {
                     anchors.centerIn: parent
                     width: parent.width
                     placeholderText: "请输入新用户昵称"
-
+                    maximumLength: 32
+//                    validator: RegExpValidator {regExp: /[a-zA-Z_0-9]+/}
                     //text: userModel.currentControlUser.name
                 }
             }
@@ -82,7 +85,7 @@ Item {
                     anchors.centerIn: parent
                     width: parent.width
                     placeholderText: "请输入新用户密码"
-
+                    maximumLength: 32
                     //text: userModel.currentControlUser.password
                 }
             }
@@ -100,6 +103,7 @@ Item {
                     anchors.centerIn: parent
                     width: parent.width
                     placeholderText: "请输入新用户邮箱"
+                    validator: RegExpValidator { regExp:/\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/ }
                     //text: userModel.currentControlUser.email
                 }
             }

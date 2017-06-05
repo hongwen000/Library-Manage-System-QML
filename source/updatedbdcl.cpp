@@ -133,8 +133,14 @@ void editUserToSecurityDb(const QString &_id, const QString &_password, const QS
         return ;
     }
     QSqlQuery query;
-    query.prepare("update security set password = ?, type = ? where id = ?");
-    query.addBindValue(_password);
+    if(_password != "") {
+        query.prepare("update security set password = ?, type = ? where id = ?");
+        query.addBindValue(_password);
+    }
+    else {
+        query.prepare("update security set type = ? where id = ?");
+
+    }
     query.addBindValue(_type);
     query.addBindValue(_id);
     if (!query.exec()) {
