@@ -44,4 +44,5 @@ HEADERS += \
     header/loginbll.h \
     header/demo.h \
     header/connectdbdcl.h \
-    header/updatedbdcl.h
+    header/updatedbdcl.h \
+    header/databasedcl.h

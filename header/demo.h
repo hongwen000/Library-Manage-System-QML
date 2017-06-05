@@ -51,14 +51,14 @@
 //    a.insert("type", "admin");
 //    db << a;
 ////    for(QVariant i : db) {
-////            qInfo() << i;
-////            qInfo() << "hhhh";
-////            qInfo() << i.toHash();
-////            qInfo() << "wwwwww";
-////            qInfo() << (i.toHash()).value("useranme");
-////            qInfo() << "god yeah ........";
-////            qInfo() << (i.toHash()).value("useranme").toString();
-////            qInfo() << "end end end";
+////            qDebug() << i;
+////            qDebug() << "hhhh";
+////            qDebug() << i.toHash();
+////            qDebug() << "wwwwww";
+////            qDebug() << (i.toHash()).value("useranme");
+////            qDebug() << "god yeah ........";
+////            qDebug() << (i.toHash()).value("useranme").toString();
+////            qDebug() << "end end end";
 ////    }
 //    return db;
 

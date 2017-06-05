@@ -36,9 +36,9 @@ public:
     }
     
     ~Book() {
-        qInfo() << "Well, now I " << m_bookName << "is going to be down";
+        qDebug() << "Well, now I " << m_bookName << "is going to be down";
         for(auto usr : m_borrower) {
-            qInfo() << "I will erase myself from user " << qvariant_cast<User*>(usr)->id();
+            qDebug() << "I will erase myself from user " << qvariant_cast<User*>(usr)->id();
             bookReturnIn(qvariant_cast<User*>(usr));
         }
     }

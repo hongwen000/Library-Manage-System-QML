@@ -6,7 +6,7 @@ UserModel *connectDBdemo(){
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName("library.db");
     if (!db.open()) {
-        qInfo() << "Error opening database";
+        qDebug() << "Error opening database";
         return nullptr;
     }
     QSqlQuery query;
@@ -42,16 +42,16 @@ UserModel *connectDBdemo(){
         tmpUserList.push_back(newUser);
     }
     std::vector<Book*> tmpBookList;
-    query.exec("select isbn, bookName, author, publishDate, totalStock, avaiStock, borrowedNum from book");
+    query.exec("select isbn, bookName, author, publishDate, totalStock/*, avaiStock, borrowedNum*/ from book");
     while (query.next()) {
         QString isbn = query.value(0).toString();
         QString bookName = query.value(1).toString();
         QString author = query.value(2).toString();
         QString publishDate = query.value(3).toString();
         int totalStock = query.value(4).toInt();
-        int avaiStock = query.value(5).toInt();
-        int borrowedNum = query.value(6).toInt();
-        Book* newBook = new Book(isbn,0,bookName,QVariantList(),QVariantList(),author,QDate::fromString(publishDate,"yyyy-MM-dd"),totalStock,avaiStock,borrowedNum);
+//        int avaiStock = query.value(5).toInt();
+//        int borrowedNum = query.value(6).toInt();
+        Book* newBook = new Book(isbn,0,bookName,QVariantList(),QVariantList(),author,QDate::fromString(publishDate,"yyyy-MM-dd"),totalStock,totalStock,totalStock);
         QQmlEngine::setObjectOwnership(newBook, QQmlEngine::CppOwnership);
         tmpBookList.push_back(newBook);
     }
@@ -81,7 +81,7 @@ QVariantList connectSecurityDemo() {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName("library.db");
     if (!db.open()) {
-        qInfo() << "Error opening database";
+        qDebug() << "Error opening database";
         return ret;
     }
     QSqlQuery query;

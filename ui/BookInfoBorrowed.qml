@@ -115,8 +115,8 @@ Page {
                     width: parent.width
                     readOnly: non_editMode
                     text: {
-                        var p = userModel.find(loginBLLIdthis.usrname)
-                        var returnDate = record.borrowDate[record.findBorrowerIndex(p)]
+                        var p = userModel.findUser(loginBLLIdthis.usrname)
+                        var returnDate = record.borrowDate[userModel.findBorrowerIndex(record,p)]
                         returnDate.toLocaleString(Qt.locale("zh_CN"), "yyyy-MM-dd")
                     }
                 }
@@ -140,9 +140,11 @@ Page {
                     text: "归还"
                     textColor: Theme.primaryColor
                     onClicked: {
-                        var p = userModel.find(loginBLLIdthis.usrname)
+                        var p = userModel.findUser(loginBLLIdthis.usrname)
                         console.log("it is " + p.id + " trying to return book")
-                        record.bookReturnIn(p)
+
+                        //record.bookReturnIn(p)
+                        userModel.bookReturnIn(record,p)
                         showError("提示","归还成功，请刷新上一页面查看结果")
                 }
                 }

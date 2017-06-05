@@ -8,7 +8,6 @@
 #include "header/usermodelbll.h"
 #include "header/userbll.h"
 #include "header/connectdbdcl.h"
-//#include "header/demo.h"
 #include "header/loginbll.h"
 int main(int argc, char *argv[])
 {

@@ -39,19 +39,25 @@ public:
     Q_INVOKABLE void append(User* user);
     Q_INVOKABLE void set(int row, User* user);
     Q_INVOKABLE void remove(int row);
-    //Interface in qml
-    Q_INVOKABLE User* find(const QString&);
+    //Interface about User for qml
+    Q_INVOKABLE User* findUser(const QString&);
     Q_INVOKABLE void addUser(const QString &_id = "",  const QString& _name = "", const QString &_password ="", const QString& _email ="", const QString& _type = "user");
     Q_INVOKABLE void editUser(User* record,  const QString& _name = "", const QString &_password ="", const QString& _email ="", const QString& _type = "user");
+    Q_INVOKABLE void setCurrentControlUser(const QString&);
     Q_INVOKABLE void removeUser(User* record);
+    //Interface about Book for qml
     Q_INVOKABLE void addBook(const QString& _bookName, const QString& _author, const QString& _isbn, int _totalStock, const QDate& _publishTime);
-    //Property handlers in qml
+    Q_INVOKABLE void bookOutTo(Book* book, User* user);
+    Q_INVOKABLE void bookReturnIn(Book* book, User* user);
+    Q_INVOKABLE bool alreadyBorrowed(Book* book, User* user);
+    Q_INVOKABLE int findBorrowerIndex(Book* book, User* user);
+    Q_INVOKABLE void deleteBook(Book* book);
+    Q_INVOKABLE void editBook(Book* book, const QString& _bookName, const QString& _author, const QDate& _publishDate, int _totalStock, int _avaiStock);
+    //Properties available in qml
     User *currentControlUser() const;
     void setCurrentControlUser(User *r);
-    Q_INVOKABLE void setCurrentControlUser(const QString&);
     QString searcher() const;
     void setSearcher(const QString&);
-
     QQmlListProperty<User> userList() {
         return QQmlListProperty<User>(this, m_users);
     }

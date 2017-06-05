@@ -5,7 +5,7 @@ void borrowBookDCL(const QString &book, const QString &user, const QString &borr
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName("library.db");
     if (!db.open()) {
-        qInfo() << "Error opening database";
+        qDebug() << "Error opening database";
         return;
     }
     QSqlQuery query;
@@ -14,7 +14,7 @@ void borrowBookDCL(const QString &book, const QString &user, const QString &borr
     query.addBindValue(user);
     query.addBindValue(borrowDate);
     if (!query.exec()) {
-        qInfo() << "Error Writing DataBase when inserting new trans";
+        qDebug() << "Error Writing DataBase when inserting new trans";
     }
     query.clear();
     query.prepare("update book set avaiStock = ?, borrowedNum = ? where isbn = ?");
@@ -22,11 +22,11 @@ void borrowBookDCL(const QString &book, const QString &user, const QString &borr
     query.addBindValue(borrowedNum);
     query.addBindValue(book);
     if (!query.exec()) {
-        qInfo() << "Error Writing DataBase when changing book borrowed and then borrowed number";
+        qDebug() << "Error Writing DataBase when changing book borrowed and then borrowed number";
     }
     //query.finish();
-    //if(!db.commit()) qInfo() << "DataBase Commit Error";
-    qInfo() << db.lastError().databaseText();
+    //if(!db.commit()) qDebug() << "DataBase Commit Error";
+    qDebug() << db.lastError().databaseText();
 }
 
 void returnBookDCL(const QString &book, const QString &user, int avaiStock, int borrowedNum)
@@ -34,7 +34,7 @@ void returnBookDCL(const QString &book, const QString &user, int avaiStock, int 
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName("library.db");
     if (!db.open()) {
-        qInfo() << "Error opening database";
+        qDebug() << "Error opening database";
         return;
     }
     QSqlQuery query;
@@ -42,7 +42,7 @@ void returnBookDCL(const QString &book, const QString &user, int avaiStock, int 
     query.addBindValue(book);
     query.addBindValue(user);
     if (!query.exec()) {
-        qInfo() << "Error Writing DataBase when deleting old trans";
+        qDebug() << "Error Writing DataBase when deleting old trans";
     }
     query.clear();
     query.prepare("update book set avaiStock = ?, borrowedNum = ? where isbn = ?");
@@ -50,7 +50,7 @@ void returnBookDCL(const QString &book, const QString &user, int avaiStock, int 
     query.addBindValue(borrowedNum);
     query.addBindValue(book);
     if (!query.exec()) {
-        qInfo() << "Error Writing DataBase when changing book borrowed and then borrowed number";
+        qDebug() << "Error Writing DataBase when changing book borrowed and then borrowed number";
     }
 
 }
@@ -62,7 +62,7 @@ void addUserToSecurityDb(const QString &_id, const QString &_password, const QSt
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName("library.db");
     if (!db.open()) {
-        qInfo() << "Error opening database";
+        qDebug() << "Error opening database";
         return ;
     }
     QSqlQuery query;
@@ -71,7 +71,7 @@ void addUserToSecurityDb(const QString &_id, const QString &_password, const QSt
     query.addBindValue(_password);
     query.addBindValue(_type);
     if (!query.exec()) {
-        qInfo() << "Error Writing Securtiy DataBase when adding new user";
+        qDebug() << "Error Writing Securtiy DataBase when adding new user";
     }
 
 }
@@ -83,7 +83,7 @@ void editUserToDb(const QString &_id, const QString &_name, const QString &_emai
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName("library.db");
     if (!db.open()) {
-        qInfo() << "Error opening database";
+        qDebug() << "Error opening database";
         return;
     }
     QSqlQuery query;
@@ -93,7 +93,7 @@ void editUserToDb(const QString &_id, const QString &_name, const QString &_emai
     query.addBindValue(_type);
     query.addBindValue(_id);
     if (!query.exec()) {
-        qInfo() << "Error Writing DataBase when editing user";
+        qDebug() << "Error Writing DataBase when editing user";
     }
 
 }
@@ -103,7 +103,7 @@ void addUserToDb(const QString &_id, const QString &_name, const QString &_email
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName("library.db");
     if (!db.open()) {
-        qInfo() << "Error opening database";
+        qDebug() << "Error opening database";
         return;
     }
     QSqlQuery query;
@@ -113,7 +113,7 @@ void addUserToDb(const QString &_id, const QString &_name, const QString &_email
     query.addBindValue(_email);
     query.addBindValue(_type);
     if (!query.exec()) {
-        qInfo() << "Error Writing DataBase when adding new user";
+        qDebug() << "Error Writing DataBase when adding new user";
     }
 
 }
@@ -129,7 +129,7 @@ void editUserToSecurityDb(const QString &_id, const QString &_password, const QS
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName("library.db");
     if (!db.open()) {
-        qInfo() << "Error opening database";
+        qDebug() << "Error opening database";
         return ;
     }
     QSqlQuery query;
@@ -144,7 +144,7 @@ void editUserToSecurityDb(const QString &_id, const QString &_password, const QS
     query.addBindValue(_type);
     query.addBindValue(_id);
     if (!query.exec()) {
-        qInfo() << "Error Writing Securtiy DataBase when editing user";
+        qDebug() << "Error Writing Securtiy DataBase when editing user";
     }
 
 }
@@ -160,14 +160,14 @@ void removeUserToDb(const QString &_id)
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName("library.db");
     if (!db.open()) {
-        qInfo() << "Error opening database";
+        qDebug() << "Error opening database";
         return;
     }
     QSqlQuery query;
     query.prepare("delete from user where id = ?");
     query.addBindValue(_id);
     if (!query.exec()) {
-        qInfo() << "Error Writing DataBase when deleting user";
+        qDebug() << "Error Writing DataBase when deleting user";
     }
 
 
@@ -178,14 +178,14 @@ void removeUserToSecurityDb(const QString &_id)
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName("library.db");
     if (!db.open()) {
-        qInfo() << "Error opening database";
+        qDebug() << "Error opening database";
         return ;
     }
     QSqlQuery query;
     query.prepare("delete from security where id = ?");
     query.addBindValue(_id);
     if (!query.exec()) {
-        qInfo() << "Error Writing Securtiy DataBase when removing user";
+        qDebug() << "Error Writing Securtiy DataBase when removing user";
     }
 
 
@@ -202,7 +202,7 @@ void addBookDCL(const QString &_bookName, const QString &_author, const QString 
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName("library.db");
     if (!db.open()) {
-        qInfo() << "Error opening database";
+        qDebug() << "Error opening database";
         return;
     }
     QSqlQuery query;
@@ -214,7 +214,7 @@ void addBookDCL(const QString &_bookName, const QString &_author, const QString 
     query.addBindValue(_totalStock);
     query.addBindValue(_totalStock);
     if (!query.exec()) {
-        qInfo() << "Error Writing DataBase when adding new book";
+        qDebug() << "Error Writing DataBase when adding new book";
     }
 
 
@@ -225,14 +225,14 @@ void removeBookDCL(const QString &_isbn)
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName("library.db");
     if (!db.open()) {
-        qInfo() << "Error opening database";
+        qDebug() << "Error opening database";
         return;
     }
     QSqlQuery query;
     query.prepare("delete from book where isbn = ?");
     query.addBindValue(_isbn);
     if (!query.exec()) {
-        qInfo() << "Error Writing DataBase when deleting book";
+        qDebug() << "Error Writing DataBase when deleting book";
     }
 
 
@@ -243,7 +243,7 @@ void editBookDCL(const QString &_bookName, const QString &_author, const QDate &
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName("library.db");
     if (!db.open()) {
-        qInfo() << "Error opening database";
+        qDebug() << "Error opening database";
         return;
     }
     QSqlQuery query;
@@ -255,7 +255,7 @@ void editBookDCL(const QString &_bookName, const QString &_author, const QDate &
     query.addBindValue(_avaiStock);
     query.addBindValue(_totalStock - _avaiStock);
     if (!query.exec()) {
-        qInfo() << "Error Writing DataBase when editing book";
+        qDebug() << "Error Writing DataBase when editing book";
     }
 
 

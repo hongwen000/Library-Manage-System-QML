@@ -63,7 +63,7 @@ void UserModel::remove(int row)
     endRemoveRows();
 }
 
-User* UserModel::find(const QString &rhs)
+User* UserModel::findUser(const QString &rhs)
 {
     for(auto i : m_users) {
         if(i->id() == rhs)
@@ -105,11 +105,43 @@ void UserModel::removeUser(User *record)
 
 void UserModel::addBook(const QString &_bookName, const QString &_author, const QString &_isbn, int _totalStock, const QDate &_publishTime)
 {
-    User* pvirutalUser_AllBooks = find("virutalUser_AllBooks");
+    User* pvirutalUser_AllBooks = findUser("virutalUser_AllBooks");
     Book* newBook = new Book(_isbn, 0, _bookName, QVariantList(), QVariantList(), _author,_publishTime, _totalStock, _totalStock, 0);
     QQmlEngine::setObjectOwnership(newBook, QQmlEngine::CppOwnership);
     addBookDCL(_bookName,_author,_isbn,_totalStock,_publishTime.toString("yyyy-MM-dd"));
     newBook->bookOutTo(pvirutalUser_AllBooks);
+}
+
+void UserModel::bookOutTo(Book* book , User *user)
+{
+    qDebug() << "userModel Forwarding bookOutTo order to " << book;
+    book->bookOutTo(user);
+}
+
+void UserModel::bookReturnIn(Book *book, User *user)
+{
+    qDebug() << "userModel Forwarding bookOutTo order to " << book;
+    book->bookReturnIn(user);
+}
+
+bool UserModel::alreadyBorrowed(Book *book, User *user)
+{
+    return book->alreadyBorrowed(user);
+}
+
+int UserModel::findBorrowerIndex(Book *book, User *user)
+{
+    return book->findBorrowerIndex(user);
+}
+
+void UserModel::deleteBook(Book *book)
+{
+    book->deconstruct();
+}
+
+void UserModel::editBook(Book *book, const QString &_bookName, const QString &_author, const QDate &_publishDate, int _totalStock, int _avaiStock)
+{
+    book->edit(_bookName,_author,_publishDate,_totalStock,_avaiStock);
 }
 
 
@@ -120,7 +152,7 @@ User* UserModel::currentControlUser() const
 
 void UserModel::setCurrentControlUser(User *r)
 {
-    qInfo() <<"Now it's me" << r->id();
+    qDebug() <<"Now it's me" << r->id();
     m_currentControlUser = r;
     emit currentControlUserChanged();
 }

@@ -165,14 +165,17 @@ Page {
                     textColor: Theme.primaryColor
                     onClicked: {
                         console.log("loginBLLIdthis.usrname is " + loginBLLIdthis.usrname)
-                        var p = userModel.find(loginBLLIdthis.usrname)
+                        var p = userModel.findUser(loginBLLIdthis.usrname)
                         console.log("p is" + p)
                         if(!(p == 0)) {
                             if(record.avaiStock >= 1) {
-                                if(record.alreadyBorrowed(p))
+                                if(userModel.alreadyBorrowed(record,p))
                                     showError("提示", "您之前已经借阅该本图书")
                                 else {
-                                record.bookOutTo(p)
+//                                console.log(userModel.bookOutTo)
+//                                console.log(record)
+                                userModel.bookOutTo(record, p)
+                                //record.bookOutTo(p)
                                 showError("提示", "借阅成功，请刷新上一页面查看结果")
                                 }
                             }

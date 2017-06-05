@@ -192,7 +192,8 @@ Page {
                     text: "下架"
                     textColor: Theme.primaryColor
                     onClicked: {
-                        record.deconstruct()
+                        userModel.deleteBook(record)
+                        //record.deconstruct()
                         showError("提示","归还成功，请返回并刷新页面")
                         bookManagePage.pop()
                     }
@@ -201,7 +202,8 @@ Page {
                     text: "修改"
                     textColor: Theme.primaryColor
                     onClicked: {
-                        record.edit(bookNameInput.text, authorInput.text,datePicker.selectedDate, totalStockInput.text, avaiStockInput.text)
+                        userModel.editBook(record, bookNameInput.text, authorInput.text,datePicker.selectedDate, totalStockInput.text, avaiStockInput.text)
+                        //record.edit(bookNameInput.text, authorInput.text,datePicker.selectedDate, totalStockInput.text, avaiStockInput.text)
                         showError("提示","修改成功，请返回并刷新页面")
                         bookManagePage.pop()
                     }

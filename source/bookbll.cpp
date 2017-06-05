@@ -6,7 +6,7 @@ void Book::bookOutTo(User *_borrower)
 {
     //Todo : limit it that only borrow one book
     m_borrower << QVariant::fromValue(_borrower);
-    qInfo() << "It's me, book" << bookName() << "been borrowed";
+    qDebug() << "It's me, book" << bookName() << "been borrowed";
     //m_borrower.append(_borrower);
     m_avaiStock--;
     m_borrowedNum++;
@@ -20,7 +20,7 @@ void Book::bookOutTo(User *_borrower, QDate _borrowDate)
 {
     //Todo : limit it that only borrow one book
     m_borrower << QVariant::fromValue(_borrower);
-    qInfo() << "It's me, book" << bookName() << "been borrowed at" << _borrowDate.toString("yyyy-MM-dd");
+    qDebug() << "It's me, book" << bookName() << "been borrowed at" << _borrowDate.toString("yyyy-MM-dd");
     //m_borrower.append(_borrower);
     m_avaiStock--;
     m_borrowedNum++;
@@ -34,7 +34,7 @@ void Book::bookReturnIn(User *_borrower)
     if(m_borrower.contains(QVariant::fromValue(_borrower)))
     {
         int index = m_borrower.indexOf(QVariant::fromValue(_borrower));
-        qInfo() << "It's me, book" << bookName() << "been returned";
+        qDebug() << "It's me, book" << bookName() << "been returned";
         m_borrower.erase(m_borrower.begin() + index);
         m_borrowDate.erase(m_borrowDate.begin() + index);
         _borrower->returnBook(this);
