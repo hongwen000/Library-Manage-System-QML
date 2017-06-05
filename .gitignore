@@ -1,2 +1,6 @@
 /material/*
 /material-design-icons/*
+*.vcxproj
+*.filters
+*.user
+*.cd
