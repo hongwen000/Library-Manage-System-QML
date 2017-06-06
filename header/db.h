@@ -5,6 +5,7 @@
 #include <memory>
 #include <QDebug>
 #include <QSqlQuery>
+#include <QSqlError>
 using std::shared_ptr;
 using std::make_shared;
 class db
