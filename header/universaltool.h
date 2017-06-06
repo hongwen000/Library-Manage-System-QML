@@ -1,5 +1,9 @@
 ﻿#ifndef UNIVERSALTOOL_H
 #define UNIVERSALTOOL_H
+#include <QGuiApplication>
+#include <QFont>
+#include <QString>
+#include <memory>
 #define DEF_PROPERTY_IMPL(type, propertyName, PropertyName)  \
     type propertyName() const {                \
         return m_##propertyName;               \
@@ -17,4 +21,10 @@
         m_##propertyName = _##propertyName;    \
         emit propertyName##Changed();          \
     }
+
+#define REGESTER_TYPE(...) \
+    qmlRegisterType<##__VA_ARGS__>("User", 1, 0, "User");
+
+
+void uni_setFont(QGuiApplication& app, const QString& fontName, int fontSize);
 #endif // UNIVERSALTOOL_H

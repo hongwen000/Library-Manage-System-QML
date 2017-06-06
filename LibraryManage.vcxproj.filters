@@ -36,12 +36,12 @@
       <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
     <Filter Include="Generated Files\Debug">
-      <UniqueIdentifier>{40d7a34a-4b67-47db-bbe5-90d3f86566d0}</UniqueIdentifier>
+      <UniqueIdentifier>{c965db5f-f2b1-4f49-ab03-9d80f8218db3}</UniqueIdentifier>
       <Extensions>cpp;moc</Extensions>
       <SourceControlFiles>False</SourceControlFiles>
     </Filter>
     <Filter Include="Generated Files\Release">
-      <UniqueIdentifier>{a66b4bc6-8ff5-47eb-9972-b1b105092f71}</UniqueIdentifier>
+      <UniqueIdentifier>{a4b348a0-3207-4d47-9939-6eb3d68f22f7}</UniqueIdentifier>
       <Extensions>cpp;moc</Extensions>
       <SourceControlFiles>False</SourceControlFiles>
     </Filter>
@@ -68,22 +68,10 @@
     <ClCompile Include="source\usermodelbll.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_bookbll.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_bookbll.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
     <ClCompile Include="Debug\moc_searchbll.cpp">
       <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_searchbll.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_userbll.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_userbll.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="Debug\moc_loginbll.cpp">
@@ -92,10 +80,22 @@
     <ClCompile Include="Release\moc_loginbll.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
+    <ClCompile Include="Debug\moc_bookbll.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_bookbll.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
     <ClCompile Include="Debug\moc_usermodelbll.cpp">
       <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_usermodelbll.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_userbll.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_userbll.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\qrc_qml.cpp">
@@ -109,7 +109,22 @@
     <ClInclude Include="header\connectdbdcl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="header\databasedcl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="header\db.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="header\dbfactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="header\demo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="header\librarydb.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="header\librarydbfactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <CustomBuild Include="header\loginbll.h">
@@ -118,6 +133,12 @@
     <CustomBuild Include="header\searchbll.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
+    <ClInclude Include="header\securitydb.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="header\securitydbfactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="header\universaltool.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -158,13 +179,13 @@
     <None Include="ui\BasicInfo1.qml">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="BookInfoBase.qml">
+    <None Include="ui\BookInfoBase.qml">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="ui\BookInfoBorrowed.qml">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="BookListBase.qml">
+    <None Include="ui\BookListBase.qml">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="ui\BookManage.qml">
@@ -194,7 +215,7 @@
     <None Include="ui\ManageUser1.qml">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="ManageUsers.qml">
+    <None Include="ui\ManageUsers.qml">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="ui\NewBook1.qml">
@@ -203,7 +224,7 @@
     <None Include="ui\NewUser1.qml">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="SearchBox.qml">
+    <None Include="ui\SearchBox.qml">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="db\library.db">

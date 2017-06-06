@@ -1,6 +1,7 @@
 ﻿import QtQuick 2.7
 import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.0
+
 import Login 1.0
 Page {
     property alias quitButton: quitButton
@@ -35,7 +36,8 @@ Page {
 
         TextField {
             id: usrnameInput
-            font.pointSize: 12
+            //font.pointSize: 12
+            font.pixelSize: 14
             Layout.preferredHeight: 40
             Layout.preferredWidth: 220
             placeholderText: qsTr("请输入用户名")
@@ -54,7 +56,7 @@ Page {
 
         TextField {
             id: pwdInput
-            font.pointSize: 12
+            font.pixelSize: 14
             Layout.preferredHeight: 40
             Layout.preferredWidth: 220
             placeholderText: qsTr("请输入密码")
