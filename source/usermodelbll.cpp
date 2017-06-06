@@ -1,7 +1,55 @@
 ﻿#include "header/usermodelbll.h"
 #include "header/userbll.h"
-#include "header/updatedbdcl.h"
+#include "header/universaldbtool.h"
 #include <QDebug>
+void UserModel::initial(const QVariantHash &libDB)
+{
+    QVariantList user_table = libDB.value("user").value<QVariantList>();
+    QVariantList book_table = libDB.value("book").value<QVariantList>();
+    QVariantList trans_table = libDB.value("trans").value<QVariantList>();
+    std::vector<User*> tmpUserList;
+    for(auto i : user_table)
+    {
+        auto term = i.toHash();
+        User* newUser = new User(term.value("id").toString(), "", QVariantList(), term.value("name").toString(), term.value("email").toString(), term.value("type").toString());
+        QQmlEngine::setObjectOwnership(newUser, QQmlEngine::CppOwnership);
+        append(newUser);
+        tmpUserList.push_back(newUser);
+    }
+    std::vector<Book*> tmpBookList;
+    for(auto i : book_table)
+    {
+        auto term  = i.toHash();
+        auto isbn = term.value("isbn").toString();
+        auto bookName = term.value("bookName").toString();
+        auto author = term.value("author").toString();
+        auto publishDate = term.value("publishDate").toString();
+        auto totalStock = term.value("totalStock").toInt();
+        Book* newBook = new Book(isbn,0,bookName,QVariantList(),QVariantList(),author,QDate::fromString(publishDate,"yyyy-MM-dd"),totalStock,totalStock,totalStock);
+        QQmlEngine::setObjectOwnership(newBook, QQmlEngine::CppOwnership);
+        tmpBookList.push_back(newBook);
+    }
+    for(auto i : trans_table)
+    {
+        auto term = i.toHash();
+        QString bookIsbn = term.value("bookIsbn").toString();
+        QString userId = term.value("userId").toString();
+        QDate borrowDate = QDate::fromString(term.value("borrowDate").toString(),"yyyy-MM-dd");
+        for(auto pBook : tmpBookList) {
+            if(pBook->isbn() == bookIsbn) {
+                for(auto pUser : tmpUserList) {
+                    if(pUser->id() == userId) {
+                        pBook->bookOutTo(pUser,borrowDate);
+                    }
+                }
+            }
+        }
+    }
+    for(auto pUser : tmpUserList)
+        if(pUser->id() == "virutalUser_AllBooks")
+            setCurrentControlUser(pUser);
+}
+
 int UserModel::rowCount(const QModelIndex & /*parent*/) const
 {
    return m_users.count();

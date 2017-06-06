@@ -17,6 +17,7 @@ QVariantHash libraryDB::get()
         term.insert("name", query.value(1).toString());
         term.insert("email", query.value(2).toString());
         term.insert("type", query.value(3).toString());
+        table << term;
     }
     ret.insert("user", table);
     table.clear();
@@ -38,6 +39,7 @@ QVariantHash libraryDB::get()
         term.insert("bookIsbn", query.value(0).toString());
         term.insert("userId", query.value(1).toString());
         term.insert("borrowDate", QDate::fromString(query.value(2).toString(),"yyyy-MM-dd"));
+        table << term;
     }
     ret.insert("trans",table);
     return ret;

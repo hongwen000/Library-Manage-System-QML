@@ -71,6 +71,14 @@ QVariantList Login::securityDB() const
     return m_securityDB;
 }
 
+void Login::initial(const QVariantHash &secDB)
+{
+    setProperty("usrLogined", false);
+    setProperty("adminLogined", false);
+    QVariant table = secDB.value("security");
+    setSecurityDB(table.value<QVariantList>());
+}
+
 
 Login::Login(QQuickItem *parent)
 {

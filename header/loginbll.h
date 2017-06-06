@@ -29,6 +29,7 @@ public:
     Q_INVOKABLE void auth();
     Q_INVOKABLE void setSecurityDB(const QVariantList&);
     QVariantList securityDB() const;
+    void initial(const QVariantHash& secDB);
 signals:
     void usrnameChanged();
     void passwordChanged();

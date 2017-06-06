@@ -8,7 +8,6 @@ SOURCES += main.cpp \
     source/bookbll.cpp \
     source/usermodelbll.cpp \
     source/loginbll.cpp \
-    source/updatedbdcl.cpp \
     source/connectdbdcl.cpp \
     source/db.cpp \
     source/dbfactory.cpp \
@@ -16,7 +15,8 @@ SOURCES += main.cpp \
     source/librarydbfactory.cpp \
     source/securitydb.cpp \
     source/securitydbfactory.cpp \
-    source/universaltool.cpp
+    source/universaltool.cpp \
+    source/universaldbtool.cpp
 
 RESOURCES += qml.qrc
 
@@ -51,11 +51,11 @@ HEADERS += \
     header/loginbll.h \
     header/demo.h \
     header/connectdbdcl.h \
-    header/updatedbdcl.h \
     header/databasedcl.h \
     header/dbfactory.h \
     header/db.h \
     header/librarydb.h \
     header/securitydb.h \
     header/librarydbfactory.h \
-    header/securitydbfactory.h
+    header/securitydbfactory.h \
+    header/universaldbtool.h

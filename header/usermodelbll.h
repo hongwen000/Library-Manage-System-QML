@@ -9,6 +9,8 @@
 #include <qqml.h>
 #include <QObject>
 #include <QQmlEngine>
+#include <memory>
+#include <vector>
 #include "userbll.h"
 #include "bookbll.h"
 #include "searchbll.h"
@@ -19,6 +21,7 @@ class UserModel : public QAbstractListModel
     Q_PROPERTY(QString searcher READ searcher WRITE setSearcher NOTIFY searcherChanged)
     Q_PROPERTY(QQmlListProperty<User> userList READ userList NOTIFY userListChanged)
 public:
+    void initial(const QVariantHash &libDB);
     //Model Role Property
     enum UserModelRole {
         UserListRole,

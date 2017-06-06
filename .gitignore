@@ -1,6 +1,7 @@
 /material/*
 /material-design-icons/*
-*.vcxproj
-*.filters
-*.user
-*.cd
+/html/*
+Doxyfile
+/x64/*
+/.vs/*
+ClassDiagram.cd
