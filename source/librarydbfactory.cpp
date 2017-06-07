@@ -1,12 +1,15 @@
 #include "header/librarydbfactory.h"
-
+#include <QCoreApplication>
 shared_ptr<db> libraryDBFactory::createDB()
 {
     //生产DB，如果是新的DB，产生表头
     shared_ptr<QSqlDatabase> pDB = make_shared<QSqlDatabase>(QSqlDatabase::addDatabase("QSQLITE", "librarydb"));
-    pDB->setDatabaseName(dir + "library.db");
+
+    pDB->setDatabaseName(dir == "" ? QCoreApplication::applicationDirPath() + "/library.db" : dir);
+    //pDB->setDatabaseName("library.db");
     if (!pDB->open()) {
         qDebug() << "Error opening library database";
+        QCoreApplication::quit();
         return nullptr;
     }
     QSqlQuery query(*pDB);

@@ -67,7 +67,7 @@ public:
 
 
 signals:
-    void currentControlUserChanged();
+    Q_INVOKABLE void currentControlUserChanged();
     Q_INVOKABLE void searcherChanged();
     void userListChanged();
 public slots:

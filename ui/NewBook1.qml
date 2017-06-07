@@ -195,8 +195,10 @@ Item {
                     onClicked: {
                             if(!isValidIsbn(isbnInput.text))
                                 showError("提示", "提交失败，ISBN不合法")
-                            else
+                            else {
                                 userModel.addBook(booknameInput.text, authorInput.text, isbnInput.text, totalstockInput.text, datePicker.selectedDate)
+                                showError("提示", "上架成功")
+                            }
                         }
                     }
             }

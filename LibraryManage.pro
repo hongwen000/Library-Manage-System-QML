@@ -2,7 +2,7 @@
 QT += qml quick
 QT += sql
 CONFIG += c++11
-
+RC_ICONS = icon.ico
 SOURCES += main.cpp \
     source/userbll.cpp \
     source/bookbll.cpp \

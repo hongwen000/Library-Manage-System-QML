@@ -56,7 +56,8 @@ Page {
                     onClicked: {
                         console.log("Try : User name is " + user.id)
                         console.log("Book name is " + record.bookName)
-                        userModel.bookReturnIn(record,p)
+                        userModel.bookReturnIn(record,user)
+                        showError("提示","还书成功")
                         //record.bookReturnIn(user)
                         bookListBase.pop()
                     }

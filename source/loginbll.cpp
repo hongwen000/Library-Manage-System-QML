@@ -82,7 +82,7 @@ void Login::initial(const QVariantHash &secDB)
 
 Login::Login(QQuickItem *parent)
 {
-
+    (parent);
 }
 
 QString Login::usrname() const

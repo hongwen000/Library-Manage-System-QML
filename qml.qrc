@@ -25,5 +25,8 @@
         <file>ui/BookListBase.qml</file>
         <file>ui/ManageUsers.qml</file>
         <file>ui/SearchBox.qml</file>
+        <file>db/security.db</file>
+        <file>icon.ico</file>
+        <file>img/9781491903995.jpg</file>
     </qresource>
 </RCC>

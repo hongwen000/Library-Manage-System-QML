@@ -106,18 +106,33 @@ Page {
                 }
             }
 
+//            ListItem.Standard {
+//                action: Icon {
+//                    anchors.centerIn: parent
+//                    name: "content/flag"
+//                }
+
+//                content: TextField {
+//                    id: typeInput
+//                    anchors.centerIn: parent
+//                    width: parent.width
+//                    text: record.type
+//                }
+//            }
             ListItem.Standard {
                 action: Icon {
                     anchors.centerIn: parent
                     name: "content/flag"
                 }
 
-                content: TextField {
-                    id: typeInput
-                    anchors.centerIn: parent
-                    width: parent.width
-                    text: record.type
-                }
+                content: MenuField {
+                        id: typeInput
+                        Layout.alignment: Qt.AlignVCenter
+                        Layout.preferredWidth: 0.5 * parent.width
+                        model: ["user", "admin"]
+                        placeholderText: record.type
+                    }
+
             }
 
             Item {
@@ -138,7 +153,7 @@ Page {
                     text: "修改"
                     textColor: Theme.primaryColor
                     onClicked: {
-                        userModel.editUser(record,nameInput.text, passwordInput.text, emailInput.text)
+                        userModel.editUser(record, record.id, nameInput.text, passwordInput.text, emailInput.text, typeInput.selectedText)
                         showError("提示", "修改成功")
                     }
                 }

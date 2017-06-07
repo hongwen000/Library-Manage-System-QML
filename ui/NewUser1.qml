@@ -115,10 +115,10 @@ Item {
                 }
 
                 content: MenuField {
+                        id: typeInput
                         Layout.alignment: Qt.AlignVCenter
                         Layout.preferredWidth: 0.5 * parent.width
-
-                        model: ["User", "Admin"]
+                        model: ["user", "admin"]
                     }
 
             }
@@ -140,7 +140,7 @@ Item {
                     text: "新建"
                     textColor: Theme.primaryColor
                     onClicked: {
-                        userModel.addUser(idInput.text, nameInput.text, passwordInput.text, emailInput.text)
+                        userModel.addUser(idInput.text, nameInput.text, passwordInput.text, emailInput.text, typeInput.selectedText)
                         showError("提示", "成功建立新用户")
                     }
 

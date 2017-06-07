@@ -56,6 +56,7 @@ Page {
                     onClicked: {
                         console.log("Try : User name is " + user.id)
                         console.log("Book name is " + record.bookName)
+                        showError("提示", "借阅成功")
                         userModel.bookOutTo(record,user)
                         //record.bookOutTo(user)
                         bookListBase.pop()

@@ -176,9 +176,16 @@
     </ClCompile>
     <ClCompile Include="source\bookbll.cpp" />
     <ClCompile Include="source\connectdbdcl.cpp" />
+    <ClCompile Include="source\db.cpp" />
+    <ClCompile Include="source\dbfactory.cpp" />
+    <ClCompile Include="source\librarydb.cpp" />
+    <ClCompile Include="source\librarydbfactory.cpp" />
     <ClCompile Include="source\loginbll.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="source\updatedbdcl.cpp" />
+    <ClCompile Include="source\securitydb.cpp" />
+    <ClCompile Include="source\securitydbfactory.cpp" />
+    <ClCompile Include="source\universaldbtool.cpp" />
+    <ClCompile Include="source\universaltool.cpp" />
     <ClCompile Include="source\userbll.cpp" />
     <ClCompile Include="source\usermodelbll.cpp" />
   </ItemGroup>
@@ -222,8 +229,8 @@
     </CustomBuild>
     <ClInclude Include="header\securitydb.h" />
     <ClInclude Include="header\securitydbfactory.h" />
+    <ClInclude Include="header\universaldbtool.h" />
     <ClInclude Include="header\universaltool.h" />
-    <ClInclude Include="header\updatedbdcl.h" />
     <CustomBuild Include="header\userbll.h">
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DQT_DEPRECATED_WARNINGS -DQT_NO_DEBUG -DQT_QUICK_LIB -DQT_GUI_LIB -DQT_QML_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DNDEBUG "-I." "-I$(QTDIR)\include" "-I$(QTDIR)\include\QtQuick" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtANGLE" "-I$(QTDIR)\include\QtQml" "-I$(QTDIR)\include\QtNetwork" "-I$(QTDIR)\include\QtSql" "-I$(QTDIR)\include\QtCore" "-I.\release" "-I$(QTDIR)\mkspecs\win32-msvc2015"</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Moc%27ing userbll.h...</Message>
@@ -352,6 +359,10 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </None>
+    <None Include="icon.ico">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </None>
     <None Include="db\library.db">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
@@ -362,11 +373,11 @@
     </None>
     <CustomBuild Include="qml.qrc">
       <FileType>Document</FileType>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(FullPath);.\qtquickcontrols2.conf;.\main.qml;.\LoginPage.qml;.\ui\AllBooks1.qml;.\ui\CurrentBorrow1.qml;.\img\9780132359238.jpg;.\img\9787121029097.jpg;.\img\9787121155352.jpg;.\ui\BookInfoBorrowed.qml;.\ui\BasicInfo1.qml;.\ui\NewBook1.qml;.\ui\ManageAll1.qml;.\ui\BookManage.qml;.\ui\NewUser1.qml;.\ui\ManageUser1.qml;.\ui\HelpReturn1.qml;.\ui\HelpReturnSub.qml;.\img\9787100013239.jpg;.\ui\HelpBorrow1.qml;.\ui\HelpBorrowSub.qml;.\db\library.db;.\ui\BookInfoBase.qml;.\ui\BookListBase.qml;.\ui\ManageUsers.qml;.\ui\SearchBox.qml;%(AdditionalInputs)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(FullPath);.\qtquickcontrols2.conf;.\main.qml;.\LoginPage.qml;.\ui\AllBooks1.qml;.\ui\CurrentBorrow1.qml;.\img\9780132359238.jpg;.\img\9787121029097.jpg;.\img\9787121155352.jpg;.\ui\BookInfoBorrowed.qml;.\ui\BasicInfo1.qml;.\ui\NewBook1.qml;.\ui\ManageAll1.qml;.\ui\BookManage.qml;.\ui\NewUser1.qml;.\ui\ManageUser1.qml;.\ui\HelpReturn1.qml;.\ui\HelpReturnSub.qml;.\img\9787100013239.jpg;.\ui\HelpBorrow1.qml;.\ui\HelpBorrowSub.qml;.\db\library.db;.\ui\BookInfoBase.qml;.\ui\BookListBase.qml;.\ui\ManageUsers.qml;.\ui\SearchBox.qml;.\db\security.db;.\icon.ico;%(AdditionalInputs)</AdditionalInputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"$(QTDIR)\bin\rcc.exe" -name "%(Filename)" -no-compress "%(FullPath)" -o .\GeneratedFiles\qrc_%(Filename).cpp</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Rcc%27ing %(Identity)...</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles\qrc_%(Filename).cpp;%(Outputs)</Outputs>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(FullPath);.\qtquickcontrols2.conf;.\main.qml;.\LoginPage.qml;.\ui\AllBooks1.qml;.\ui\CurrentBorrow1.qml;.\img\9780132359238.jpg;.\img\9787121029097.jpg;.\img\9787121155352.jpg;.\ui\BookInfoBorrowed.qml;.\ui\BasicInfo1.qml;.\ui\NewBook1.qml;.\ui\ManageAll1.qml;.\ui\BookManage.qml;.\ui\NewUser1.qml;.\ui\ManageUser1.qml;.\ui\HelpReturn1.qml;.\ui\HelpReturnSub.qml;.\img\9787100013239.jpg;.\ui\HelpBorrow1.qml;.\ui\HelpBorrowSub.qml;.\db\library.db;.\ui\BookInfoBase.qml;.\ui\BookListBase.qml;.\ui\ManageUsers.qml;.\ui\SearchBox.qml;%(AdditionalInputs)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(FullPath);.\qtquickcontrols2.conf;.\main.qml;.\LoginPage.qml;.\ui\AllBooks1.qml;.\ui\CurrentBorrow1.qml;.\img\9780132359238.jpg;.\img\9787121029097.jpg;.\img\9787121155352.jpg;.\ui\BookInfoBorrowed.qml;.\ui\BasicInfo1.qml;.\ui\NewBook1.qml;.\ui\ManageAll1.qml;.\ui\BookManage.qml;.\ui\NewUser1.qml;.\ui\ManageUser1.qml;.\ui\HelpReturn1.qml;.\ui\HelpReturnSub.qml;.\img\9787100013239.jpg;.\ui\HelpBorrow1.qml;.\ui\HelpBorrowSub.qml;.\db\library.db;.\ui\BookInfoBase.qml;.\ui\BookListBase.qml;.\ui\ManageUsers.qml;.\ui\SearchBox.qml;.\db\security.db;.\icon.ico;%(AdditionalInputs)</AdditionalInputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">"$(QTDIR)\bin\rcc.exe" -name "%(Filename)" -no-compress "%(FullPath)" -o .\GeneratedFiles\qrc_%(Filename).cpp</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Rcc%27ing %(Identity)...</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles\qrc_%(Filename).cpp;%(Outputs)</Outputs>
@@ -375,6 +386,13 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </None>
+    <None Include="db\security.db">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="C:\Users\lixin\Desktop\Project\LibraryManage\LibraryManage_resource.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />

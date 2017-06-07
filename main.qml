@@ -86,6 +86,7 @@ ApplicationWindow {
         id: page
         title: getTrans(selectedComponent)
         property alias pagethis: page
+        property int times: 0
         actionBar.maxActionCount: navDrawer.enabled ? 3 : 4
         actions: [
             Action {
@@ -134,107 +135,19 @@ ApplicationWindow {
             }
 
         ]
-
         backAction: navDrawer.action
+        onSelectedTabChanged: {
+            console.log("what")
+            console.log(tabViewO.currentIndex)
+            console.log(tabViewO.getTab(tabViewO.currentIndex))
+            tabViewO.getTab(tabViewO.currentIndex).sourceComponent = noExist
+            tabViewO.getTab(tabViewO.currentIndex).sourceComponent = tabDelegate
+        }
 
         LoginPage  {
             id:loginPage
         }
-//        Loader {
-//            id: example
-//            anchors.fill: parent
-//            asynchronous: true
-//            visible: status == Loader.Ready
-//            // selectedComponent will always be valid, as it defaults to the first component
-//            source: {
-//                if (navDrawer.enabled) {
-//                    return Qt.resolvedUrl("qrc:/ui/%1.qml").arg(main.selectedComponent.replace(" ", ""))
-//                } else {
-//                    return Qt.resolvedUrl("qrc:/ui/%1.qml").arg(selectedComponent.replace(" ", ""))
-//                }
-//            }
-//        }
 
-//        ProgressCircle {
-//            anchors.centerIn: parent
-//            visible: example.status == Loader.Loading
-//        }
-
-//        NavigationDrmawer {
-//            id: navDrawer
-//            enabled: true//page.width < Units.dp(500)
-
-
-
-
-//            onEnabledChanged: smallLoader.active = enabled
-
-//            Flickable {
-//                anchors.fill: parent
-//                id : iamgood
-
-
-//                contentHeight: Math.max(content.implicitHeight, height)
-
-//                Column {
-//                    id: content
-//                    anchors.fill: parent
-
-//                    Repeater {
-//                        //model: sections
-//                        model: realsections
-//                        delegate: Column {
-//                            width: parent.width
-
-//                            ListItem.Subheader {
-//                                text: (usrLogined || adminLogined) ? realSectionTitles[index] : ""
-//                            }
-
-//                            Repeater {
-
-//                                model: modelData
-//                                delegate: ListItem.Standard {
-//                                    function getRightSource() {
-//                                        if (navDrawer.enabled) {
-//                                            return Qt.resolvedUrl("qrc:/ui/%1.qml").arg(main.selectedComponent.replace(" ", ""))
-//                                        } else {
-//                                            return Qt.resolvedUrl("qrc:/ui/%1.qml").arg(selectedComponent.replace(" ", ""))
-//                                        }
-//                                    }
-//                                    text: getTrans(modelData)
-//                                    selected: modelData == main.selectedComponent
-//                                    onClicked: {
-//                                        console.log("at line 207, changing source to " + getRightSource())
-//                                        main.selectedComponent = modelData
-//                                        example.source = ""
-//                                        example.source = getRightSource()
-//                                        navDrawer.close()
-//                                    }
-//                                }
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//            Flickable {
-
-//                id: flickable
-//                anchors {
-//                    left: sidebar.right
-//                    right: parent.right
-//                    top: parent.top
-
-//                    bottom: parent.bottom
-//                    //fill: parent
-//                }
-//                clip: true
-//                contentHeight: Math.max(example.implicitHeight + 40, height)
-//            }
-//            Scrollbar {
-//                flickableItem: flickable
-//            }
-
-//        }
         NavigationDrawer {
             id: navDrawer
             enabled: page.width < Units.dp(500)
@@ -257,7 +170,9 @@ ApplicationWindow {
                             width: parent.width
 
                             ListItem.Subheader {
-                                text: realSectionTitles[index]
+
+
+                                text: realSectionTitles[index] == undefined ? "" : realSectionTitles[index]
                             }
 
                             Repeater {
@@ -277,14 +192,25 @@ ApplicationWindow {
             }
         }
         Repeater {
-            //model: !navDrawer.enabled ? sections : 0
+            id:repeater233
             model:  !navDrawer.enabled ? realsections : 0
             delegate: Tab {
-                title: (usrLogined || adminLogined) ? realSectionTitles[index] :""
+                id: tbbb
 
+                title: (realSectionTitles[index] != undefined && usrLogined || adminLogined) ? realSectionTitles[index] :""
+                property alias loaderItem: tbbb.item
+                onVisibleChanged: {
+//                    userModel.currentControlUserChanged()
+//                    console.log(page.times)
+//                    if(page.times % 2 == 0) {
+//                        console.log(item)
+//                        tbbb.sourceComponent = noExist
+//                        tbbb.sourceComponent = tabDelegate
+//                    }
+//                    page.times = page.times + 1
+                }
                 property string selectedComponent: modelData[0]
                 property var section: modelData
-
                 sourceComponent: tabDelegate
             }
         }
@@ -293,15 +219,10 @@ ApplicationWindow {
             id: smallLoader
             anchors.fill: parent
             sourceComponent: tabDelegate
-
             property var section: []
             visible: active
             active: false
-
-
         }
-
-
     }
 
     Dialog {
@@ -411,12 +332,17 @@ ApplicationWindow {
     Component {
         id: tabDelegate
         Item {
+            property int xxx: 150
             function getRightSource() {
                 if (navDrawer.enabled) {
                     return Qt.resolvedUrl("qrc:/ui/%1.qml").arg(main.selectedComponent.replace(" ", ""))
                 } else {
                     return Qt.resolvedUrl("qrc:/ui/%1.qml").arg(selectedComponent.replace(" ", ""))
                 }
+            }
+            function reloadSource() {
+                example.source = ""
+                example.source = getRightSource()
             }
             Sidebar {
                 id: sidebar
@@ -443,9 +369,7 @@ ApplicationWindow {
                     }
                 }
             }
-            property alias example: example
             Flickable {
-
                 id: flickable
                 anchors {
                     left: sidebar.right
@@ -455,6 +379,7 @@ ApplicationWindow {
                 }
                 clip: true
                 contentHeight: Math.max(example.implicitHeight + 40, height)
+                property alias example: example
                 Loader {
                     id: example
                     anchors.fill: parent
@@ -477,6 +402,18 @@ ApplicationWindow {
             }
             Scrollbar {
                 flickableItem: flickable
+            }
+        }
+    }
+    Component {
+        id: noExist
+        Item {
+            Rectangle {
+                x: 100
+                y: 100
+                anchors.centerIn: parent
+                visible: true
+
             }
         }
     }

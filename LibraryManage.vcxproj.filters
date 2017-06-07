@@ -36,12 +36,12 @@
       <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
     <Filter Include="Generated Files\Debug">
-      <UniqueIdentifier>{c965db5f-f2b1-4f49-ab03-9d80f8218db3}</UniqueIdentifier>
+      <UniqueIdentifier>{b4b896b3-0023-410b-9ada-933d82bc03f5}</UniqueIdentifier>
       <Extensions>cpp;moc</Extensions>
       <SourceControlFiles>False</SourceControlFiles>
     </Filter>
     <Filter Include="Generated Files\Release">
-      <UniqueIdentifier>{a4b348a0-3207-4d47-9939-6eb3d68f22f7}</UniqueIdentifier>
+      <UniqueIdentifier>{5d854ba1-7729-4758-abcb-56c4db651b0d}</UniqueIdentifier>
       <Extensions>cpp;moc</Extensions>
       <SourceControlFiles>False</SourceControlFiles>
     </Filter>
@@ -53,13 +53,34 @@
     <ClCompile Include="source\connectdbdcl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="source\db.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\dbfactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\librarydb.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\librarydbfactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="source\loginbll.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\updatedbdcl.cpp">
+    <ClCompile Include="source\securitydb.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\securitydbfactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\universaldbtool.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\universaltool.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="source\userbll.cpp">
@@ -68,10 +89,22 @@
     <ClCompile Include="source\usermodelbll.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Debug\moc_userbll.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_userbll.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
     <ClCompile Include="Debug\moc_searchbll.cpp">
       <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_searchbll.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_usermodelbll.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_usermodelbll.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="Debug\moc_loginbll.cpp">
@@ -84,18 +117,6 @@
       <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_bookbll.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_usermodelbll.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_usermodelbll.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_userbll.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_userbll.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\qrc_qml.cpp">
@@ -139,10 +160,10 @@
     <ClInclude Include="header\securitydbfactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="header\universaltool.h">
+    <ClInclude Include="header\universaldbtool.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="header\updatedbdcl.h">
+    <ClInclude Include="header\universaltool.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <CustomBuild Include="header\userbll.h">
@@ -227,6 +248,9 @@
     <None Include="ui\SearchBox.qml">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="icon.ico">
+      <Filter>Resource Files</Filter>
+    </None>
     <None Include="db\library.db">
       <Filter>Resource Files</Filter>
     </None>
@@ -239,5 +263,11 @@
     <None Include="qtquickcontrols2.conf">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="db\security.db">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="C:\Users\lixin\Desktop\Project\LibraryManage\LibraryManage_resource.rc" />
   </ItemGroup>
 </Project>
