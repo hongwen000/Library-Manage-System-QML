@@ -64,7 +64,7 @@ Page {
                     }
 
                     action: Image {
-                        source: qsTr("qrc:/img/") + record.isbn + qsTr(".jpg")
+                        source: applicationDirPath + "/img/" + record.isbn + qsTr(".jpg")
                         width: Units.dp(72)
                         height: Units.dp(96)
                         x:bookInfoText.x

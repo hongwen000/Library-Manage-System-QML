@@ -72,13 +72,14 @@ Page {
                 id: regButton
                 text: qsTr("注册")
                 onClicked: {
-                    showError("提示","本系统不允许个人注册账号，请联系管理员进行注册")
+                    showError("提示","本系统不允许个人注册账号，登陆管理员账号，在“用户管理”界面进行注册")
                 }
             }
 
             Button {
                 id: loginButton
                 text: qsTr("登陆")
+                Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
 
                 onClicked: {
                     loginBLLIdthis.setSecurityDB(login.securityDB)
@@ -90,6 +91,7 @@ Page {
             Button {
                 id: quitButton
                 text: qsTr("退出")
+                Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
                 onClicked: {
                     close();
                 }

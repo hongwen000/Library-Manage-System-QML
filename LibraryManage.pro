@@ -1,7 +1,7 @@
-
 QT += qml quick
 QT += sql
 CONFIG += c++11
+QT+=svg
 RC_ICONS = icon.ico
 SOURCES += main.cpp \
     source/userbll.cpp \
@@ -18,7 +18,8 @@ SOURCES += main.cpp \
     source/universaltool.cpp \
     source/universaldbtool.cpp
 
-RESOURCES += qml.qrc
+RESOURCES += qml.qrc \
+    icons/icons.qrc
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =

@@ -159,7 +159,7 @@ Page {
         Image {
             asynchronous: true
             //anchors.margins: Units.dp(10)
-            source: qsTr("qrc:/img/") + record.isbn + qsTr(".jpg")
+            source: applicationDirPath + "/img/" + record.isbn + qsTr(".jpg")
             width: Units.dp(320)
             height: Units.dp(400)
             //x:bookInfoText.x
