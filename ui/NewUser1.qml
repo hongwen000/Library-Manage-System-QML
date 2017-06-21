@@ -103,7 +103,7 @@ Item {
                     anchors.centerIn: parent
                     width: parent.width
                     placeholderText: "请输入新用户邮箱"
-                    validator: RegExpValidator { regExp:/\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/ }
+                    validator: RegExpValidator { regExp:/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/ }
                     //text: userModel.currentControlUser.email
                 }
             }

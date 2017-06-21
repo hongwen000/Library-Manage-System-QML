@@ -85,8 +85,7 @@ Page {
                     id: passwordInput
                     anchors.centerIn: parent
                     width: parent.width
-
-                    text: record.password
+                    placeholderText: "******"
                 }
             }
 
@@ -94,15 +93,17 @@ Page {
 
             ListItem.Standard {
                 action: Icon {
-                    id: emailInput
                     anchors.centerIn: parent
                     name: "communication/email"
                 }
 
                 content: TextField {
+                    id: emailInput
                     anchors.centerIn: parent
                     width: parent.width
                     text: record.email
+
+                    validator: RegExpValidator { regExp:/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/ }
                 }
             }
 
@@ -153,7 +154,7 @@ Page {
                     text: "修改"
                     textColor: Theme.primaryColor
                     onClicked: {
-                        userModel.editUser(record, record.id, nameInput.text, passwordInput.text, emailInput.text, typeInput.selectedText)
+                        userModel.editUser(record, nameInput.text, passwordInput.text, emailInput.text, typeInput.selectedText)
                         showError("提示", "修改成功")
                     }
                 }

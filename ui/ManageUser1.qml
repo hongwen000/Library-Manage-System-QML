@@ -8,7 +8,7 @@ import QtQuick.Layouts 1.1
 import QtQuick.Controls 1.3 as QuickControls
 import User 1.0
 
-Page {
+ColumnLayout {
     //property alias searchbox: searchPage.searchboxout
     id: allUserPage
     View {
@@ -33,7 +33,7 @@ Page {
                     maximumLineCount: 8
                     Text {
                         id: bookInfoText
-                        text:index  + 1 + qsTr(" : ") + record.id + " " + record.password
+                        text:index  + 1 + qsTr(" : ") + record.id
                         leftPadding: Units.dp(32)
                         topPadding: Units.dp(32)
                         property alias bookInfoText: bookInfoText

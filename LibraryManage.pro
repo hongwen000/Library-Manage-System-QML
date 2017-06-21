@@ -47,7 +47,6 @@ HEADERS += \
     header/usermodelbll.h \
     header/userbll.h \
     header/bookbll.h \
-    header/searchbll.h \
     header/universaltool.h \
     header/loginbll.h \
     header/demo.h \

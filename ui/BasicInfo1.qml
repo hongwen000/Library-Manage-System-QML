@@ -103,7 +103,6 @@ Item {
                     anchors.centerIn: parent
                     width: parent.width
                     text: userModel.currentControlUser.email
-                    validator: RegExpValidator { regExp:/\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/ }
                 }
             }
             ListItem.Standard {

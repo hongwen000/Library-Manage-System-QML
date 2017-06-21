@@ -9,7 +9,7 @@ import QtQuick.Layouts 1.1
 import QtQuick.Controls 1.3 as QuickControls
 import "../"
 
-Page {
+ColumnLayout {
     Component.onCompleted: userModel.setCurrentControlUser("virutalUser_AllBooks")
 
     id: bookListBase

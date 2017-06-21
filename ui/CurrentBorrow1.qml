@@ -9,12 +9,13 @@ import QtQuick.Layouts 1.1
 import QtQuick.Controls 1.3 as QuickControls
 import "../"
 
-Page {
+ColumnLayout {
     Component.onCompleted: {
         console.log("File changed to CurrentBorrow1.qml, changing setCurrentControlUser to " + loginBLLIdthis.usrname)
         userModel.setCurrentControlUser(loginBLLIdthis.usrname)
 
-    }id: bookListBase
+    }
+    id: bookListBase
 
     View {
         anchors {

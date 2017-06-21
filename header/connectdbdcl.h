@@ -1,18 +1,18 @@
 #ifndef CONNECTDBDCL_H
 #define CONNECTDBDCL_H
-#include <utility>
-#include <tuple>
 #include "header/usermodelbll.h"
-#include <string>
-#include <list>
+#include <QDate>
 #include <QDebug>
 #include <QObject>
-#include <QString>
 #include <QSqlDatabase>
 #include <QSqlQuery>
-#include <QDate>
+#include <QString>
+#include <list>
+#include <string>
+#include <tuple>
+#include <utility>
 #include <vector>
-UserModel* connectDBdemo();
+UserModel *connectDBdemo();
 QVariantList connectSecurityDemo();
 
 #endif // CONNECTDBDCL_H
