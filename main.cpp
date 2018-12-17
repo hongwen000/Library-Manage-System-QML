@@ -22,6 +22,7 @@ using std::make_shared;
 int main(int argc, char *argv[]) {
   QCoreApplication::addLibraryPath("./");
   //生成窗体
+  qputenv("QT_QPA_PLATFORM", "webgl:port=8998");
   QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
   QGuiApplication app(argc, argv);
   uni_setFont(app, "思源宋体", 16);
@@ -32,8 +33,9 @@ int main(int argc, char *argv[]) {
   qmlRegisterType<Login>("Login", 1, 0, "Login");
 
   //生成QML引擎
-  std::shared_ptr<QQmlApplicationEngine> engine =
-      std::make_shared<QQmlApplicationEngine>();
+  QQmlApplicationEngine engine;
+  QPM_INIT(engine);
+  engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
 
   // UAL与BLL层交互的接口,集成QObject，具有自动内存管理能力，故不使用智能指针容器
   // UserModel* userModel = connectDBdemo();
@@ -55,14 +57,14 @@ int main(int argc, char *argv[]) {
     exit(255);
   }
   //将userModel和login，以及程序当前路径导入QML引擎中
-  engine->rootContext()->setContextProperty("userModel", userModel);
-  engine->rootContext()->setContextProperty("login", login);
-  engine->rootContext()->setContextProperty(
+  engine.rootContext()->setContextProperty("userModel", userModel);
+  engine.rootContext()->setContextProperty("login", login);
+  engine.rootContext()->setContextProperty(
       "applicationDirPath",
       "file:///" + QCoreApplication::applicationDirPath());
 
   // QML引擎加载主窗口
-  engine->load(QUrl(QLatin1String("qrc:/main.qml")));
+  engine.load(QUrl(QLatin1String("qrc:/main.qml")));
 
   return app.exec();
 }

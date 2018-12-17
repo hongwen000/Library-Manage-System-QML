@@ -12,7 +12,7 @@ shared_ptr<db> libraryDBFactory::createDB() {
                            : dir);
   // pDB->setDatabaseName("library.db");
   if (!pDB->open()) {
-    qDebug() << "Error opening library database";
+    qDebug() << "Error opening library database" << dir <<  QCoreApplication::applicationDirPath();
     std::ofstream log;
     log.open("error.log");
     log << "Error opening library database";

@@ -1,7 +1,7 @@
 ﻿import QtQuick 2.7
 import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.0
-import Material 0.2
+import Material 0.3
 import Material.ListItems 0.1 as ListItem
 import Login 1.0
 import Backend 1.0

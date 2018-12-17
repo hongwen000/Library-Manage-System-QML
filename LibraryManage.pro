@@ -1,4 +1,6 @@
 QT += qml quick
+DEFINES += QPM_INIT\\(E\\)=\"E.addImportPath(QStringLiteral(\\\"qrc:/\\\"));\"
+include(material/material.pri)
 QT += sql
 CONFIG += c++11
 QT+=svg

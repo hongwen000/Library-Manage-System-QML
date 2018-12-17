@@ -5,3 +5,4 @@ Doxyfile
 /x64/*
 /.vs/*
 ClassDiagram.cd
+*.pro.user.*

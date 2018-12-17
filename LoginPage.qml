@@ -11,7 +11,7 @@ Page {
 
     height: main.height
     width: main.width
-    font.family: "思源宋体"
+//    font.family: "思源宋体"
     function logout() {
         parent.pop()
     }
@@ -60,7 +60,7 @@ Page {
             Layout.preferredHeight: 40
             Layout.preferredWidth: 220
             placeholderText: qsTr("请输入密码")
-            echoMode: "Password"
+            echoMode: TextInput.Password
         }
 
         RowLayout {
